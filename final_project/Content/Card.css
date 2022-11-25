@@ -1,0 +1,62 @@
+﻿.content {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    /*FUNCTIONALITY*/
+    perspective: 150rem;
+    height: 20rem;
+    width: 30rem;
+    position: relative;
+}
+    card__side{
+    height: 15rem;
+    transition: all 0.8s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: auto;
+    width: 30rem;
+    backface-visibility: hidden;
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0 1.5rem 4rem rgba(black, 0.4);
+}
+card__side--front {
+    background-color: #1c1c1c;
+}
+
+card__side--back {
+    transform: rotateY(180deg);
+    background-color: #1c1c1c;
+}
+
+}
+
+card:hover card__side--front {
+    transform: rotateY(-180deg);
+}
+
+card:hover card__side--back {
+    transform: rotateY(0deg);
+}
+
+//FRONT SIDE STYLING
+card__cont {
+    height: 15rem;
+    background-color: #1c1c1c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+card__cta {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+}

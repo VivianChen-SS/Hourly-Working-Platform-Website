@@ -1,0 +1,290 @@
+﻿@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url(https://use.fontawesome.com/releases/v5.3.1/css/all.css);
+.checked {
+    color: orange;
+}
+
+.card {
+    position: relative;
+    overflow: hidden;
+    height: 210px;
+    width: 100%;
+    margin-right: 3px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+    .card:hover {
+        /*以下內容取自：https://css-tricks.com/almanac/properties/b/box-shadow/ */
+        transform: scale(1.03);
+        -webkit-box-shadow: 0 1px 4px rgba(92, 92, 138, 0.4), 0 0 40px rgba( 92, 92, 138, 0.2);
+        -moz-box-shadow: 0 1px 4px rgba( 92, 92, 138, 0.4), 0 0 40px rgba( 92, 92, 138, 0.2);
+        box-shadow: 0 1px 4px rgba( 92, 92, 138, 0.4), 0 0 40px rgba( 92, 92, 138, 0.2);
+        -webkit-transform: rotate(1.5deg);
+        -moz-transform: rotate(1.5deg);
+        -o-transform: rotate(1.5deg);
+        -ms-transform: rotate(1.5deg);
+        transform: rotate(1.5deg);
+        right: 10px;
+        left: auto;
+        /*-webkit-box-shadow: 0 1px 4px rgba(119, 51, 255, 0.4), 0 0 40px rgba( 119, 51, 255, 0.2);
+            -moz-box-shadow: 0 1px 4px rgba( 119, 51, 255, 0.4), 0 0 40px rgba( 119, 51, 255, 0.2);
+            box-shadow: 0 1px 4px rgba( 119, 51, 255, 0.4), 0 0 40px rgba( 119, 51, 255, 0.2);*/
+    }
+
+/*名字字體 START (參考：https://codepen.io/markmead/pen/YjQKeZ )*/
+.heading {
+    font-size: 5rem;
+    font-weight: bolder;
+    letter-spacing: 6px;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 70px
+}
+
+.heading--stroke-shadow {
+    color: white;
+    text-shadow: -2px 0 #0d1b1e, 0 -2px #0d1b1e, 2px 0 #0d1b1e, 0 2px #0d1b1e, 2px 2px #0d1b1e, -2px -2px #0d1b1e, -2px 2px #0d1b1e, 2px -2px#0d1b1e, 6px 6px #2dc7ff;
+}
+/*名字字體 END*/
+/*tag START (猜考：https://codepen.io/wbeeftink/pen/dIaDH )*/
+.tags {
+    list-style: none;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    color: white;
+    margin: 4px;
+    margin-left: 30px;
+    font-weight: bold;
+}
+
+    .tags li {
+        float: left;
+    }
+
+.tag {
+    background-color: #ffbb99;
+    border-radius: 3px 0 0 3px;
+    display: inline-block;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 20px 0 23px;
+    position: relative;
+    margin: 0 10px 10px 0;
+    text-decoration: none;
+    -webkit-transition: color 0.2s;
+}
+
+    .tag::before {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+        content: '';
+        height: 6px;
+        left: 10px;
+        position: absolute;
+        width: 6px;
+        top: 10px;
+    }
+
+    .tag::after {
+        background: transparent;
+        background: #fff;
+        border-bottom: 13px solid transparent;
+        border-left: 10px solid #ffbb99;
+        border-top: 13px solid transparent;
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+/*tag END*/
+/*dropdown START*/
+.dropbtn {
+    display: inline-block;
+    padding: 0.5em 1.5em;
+    border: 0.16em solid #669900;
+    margin: 0 0.3em 0.3em 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-weight: bold;
+    color: #669900;
+    text-align: center;
+    transition: all 0.15s;
+}
+
+.dropdown {
+    float: right;
+}
+
+.list_2 {
+    clear: right;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+    .dropdown-content .sorting_a {
+        color: #669900;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+
+        .dropdown-content .sorting_a:hover {
+            font-size: 130%;
+            font-weight: bold;
+            color: #e68a00;
+            border: 0.16em solid #e68a00;
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+
+    .dropdown-content a {
+        color: #669900;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+
+        .dropdown-content a:hover {
+            font-size: 130%;
+            font-weight: bold;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    font-size: 115%;
+    color: #e68a00;
+    border-color: #e68a00;
+    background-color: #ffffff;
+    -webkit-transform: rotate(3deg);
+    -moz-transform: rotate(3deg);
+    -o-transform: rotate(3deg);
+    -ms-transform: rotate(3deg);
+    transform: rotate(3deg);
+    right: 10px;
+    left: auto;
+    -webkit-box-shadow: 0 1px 4px rgba( 204, 102, 0, 0.4), 0 0 40px rgba( 204, 102, 0, 0.2) inset;
+    -moz-box-shadow: 0 1px 4px rgba( 204, 102, 0, 0.4), 0 0 40px rgba( 204, 102, 0, 0.2) inset;
+    box-shadow: 0 1px 4px rgba( 204, 102, 0, 0.4), 0 0 40px rgba( 204, 102, 0, 0.2) inset;
+}
+/*dropdown END*/
+/*search bar START*/
+body {
+    min-width: 550px;
+}
+
+.search {
+    width: 100%;
+    position: relative;
+    display: flex;
+}
+
+.searchTerm {
+    width: 100%;
+    border: 3px solid #669900;
+    border-right: none;
+    padding: 5px;
+    height: 36px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #669900;
+}
+
+    .searchTerm:focus {
+        color: #669900;
+    }
+
+.searchButton {
+    width: 40px;
+    height: 36px;
+    border: 1px solid #669900;
+    background: #669900;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.search_wrap {
+    width: 30%;
+    position: relative;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+}
+
+/*search bar END*/
+.single_page {
+    display: inline-block;
+    padding: 0.2em 0.8em;
+    border: 0.16em solid #ff9966;
+    margin: 0 0.3em 0.3em 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 120%;
+    color: #ff9966;
+    text-align: center;
+    transition: all 0.15s;
+}
+
+    .single_page:hover {
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 120%;
+        color: #ff9966;
+    }
+
+.title_wrap {
+    position: relative;
+    margin-top: 10px;
+    font-size: 45px
+}
+.dot_wrap {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 280px;
+    margin-top: 5px
+}
+.applierCount_wrap {
+    width: 450px;
+    position: relative;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bolder;
+}
+
+.retroshadow {
+    /*font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+        color: #2c2c2c;
+        letter-spacing: .05em;
+        text-shadow: 4px 4px 0px #d5d5d5;*/
+    font-family: "Comic Sans MS","微軟正黑體", cursive, sans-serif;
+    margin: 11px 0 17px 0;
+    color: black;
+    text-shadow: 0 13.36px 8.896px #c4b59d,0 -2px 1px #fff;
+    letter-spacing: -4px;
+}

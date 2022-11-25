@@ -1,0 +1,88 @@
+﻿@model final_project.Models.MBITPreferenceViewModels
+@{
+    ViewBag.Title = "MBITPreference";
+}
+
+<link href="~/Content/EVENT6.css" rel="stylesheet" />
+<style>
+
+    .submit {
+        width: 30%;
+        position: absolute;
+        top: 96%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+
+<h2>MBTI職能選擇</h2>
+<span style="color:gray">
+    STEP 1) 輸入資料 >
+    STEP 2) 選擇標籤 >
+    <b style="color:black"> STEP 3) 選擇職業適配性格</b>
+    STEP 4) 確認資料 >
+    STEP 5) 成功送出，等待回覆！
+</span>
+<hr />
+
+
+<div class="container">
+    <div class="row clearfix">
+
+        <div class="col-lg-2">
+        </div>
+
+        <div class="col-lg-8 MBIT" style="position: relative;padding-bottom:50px">
+            @using (Html.BeginForm())
+            {
+                <br /> <br />
+                @Html.ValidationMessageFor(m => m.attitudes, "", new { @class = "text-danger" })
+                <p>能量來源(Attitudes)： </p>
+                <label>@Html.RadioButtonFor(m => m.attitudes, "I", new { onclick = "showHideRequire('I')" }) 內向型 –– 獨立自主、埋首工作、勸勉奮發、沈思的依自己理想行事。</label><br />
+                <label>@Html.RadioButtonFor(m => m.attitudes, "E", new { onclick = "showHideRequire('E')" }) 外向型 –– 能運用外在環境資源、樂意與他人來往、開放的態度、行動派、易為他人所了解。</label><br />
+                <label>@Html.RadioButtonFor(m => m.attitudes, "other", new { onclick = "showHideRequire('1')" }) 都可以 </label><br /><br />
+
+                @Html.ValidationMessageFor(m => m.functions_SN, "", new { @class = "text-danger" })
+                <p>感知偏好(Functions_SN)： </p>
+                <label>@Html.RadioButtonFor(m => m.functions_SN, "S", new { onclick = "showHideRequire('S')" }) 實感型(辨識型) –– 注意細節、重視實際、能記住鎖碎細節、耐得住煩悶的工作、有耐性、細心有系統。</label><br />
+                <label>@Html.RadioButtonFor(m => m.functions_SN, "N", new { onclick = "showHideRequire('N')" })  直覺型  –– 對事情能面面觀之、以整體概念看事、富想像力、嘗試新鮮構想、喜歡複雜的工作、喜歡解決新奇的問題。 </label><br />
+                <label>@Html.RadioButtonFor(m => m.functions_SN, "other", new { onclick = "showHideRequire('2')" }) 都可以 </label><br /><br />
+
+
+                @Html.ValidationMessageFor(m => m.functions_TF, "", new { @class = "text-danger" })
+                <p>判斷偏好(Functions_TF)： </p>
+                <label>@Html.RadioButtonFor(m => m.functions_TF, "T", new { onclick = "showHideRequire('T')" }) 思考型(理性) –– 合乎邏輯擅於分析、客觀、公正、有邏輯系統的思考、具擬判能力、堅定。 </label><br />
+                <label>@Html.RadioButtonFor(m => m.functions_TF, "F", new { onclick = "showHideRequire('F')" }) 情感型(感性) –– 體諒他人感受、了解他人的需要、喜歡和諧的人際關係、易表露情感、喜去說服他人。</label><br />
+                <label>@Html.RadioButtonFor(m => m.functions_TF, "other", new { onclick = "showHideRequire('3')" }) 都可以 </label><br /><br />
+
+
+                @Html.ValidationMessageFor(m => m.lifestylePreferences, "", new { @class = "text-danger" })
+                <p>認知態度(Lifestyle preferences)： </p>
+                <label>@Html.RadioButtonFor(m => m.lifestylePreferences, "J", new { onclick = "showHideRequire('J')" }) 判斷型(果斷型) –– 有計劃系統的、斷有決心的、有控制的能力、做決定明快。 </label><br />
+                <label>@Html.RadioButtonFor(m => m.lifestylePreferences, "P", new { onclick = "showHideRequire('P')" }) 感知型(熟思型) –– 易於協調、可由各角度欣賞事物、具彈性、開放的態度、依據可靠的資料做定、不任意批評。</label><br />
+                <label>@Html.RadioButtonFor(m => m.lifestylePreferences, "other", new { onclick = "showHideRequire('4')" }) 都可以 </label><br /><br />
+
+
+                @Html.ValidationMessageFor(m => m.RequiredCharacter, "", new { @class = "text-danger" })
+                <p>有哪一個是你一定要有的性格？ (如果以下選項不見了，把上面選項案一遍就會出現了)</p>
+
+                <label id="label_I" style="display:none">@Html.RadioButtonFor(m => m.RequiredCharacter, "I", new { id = "Req_I" }) 內向型</label>
+                <label id="label_E" style="display:none">@Html.RadioButtonFor(m => m.RequiredCharacter, "E", new { id = "Req_E" }) 外向型</label>
+                <label id="label_S" style="display:none">@Html.RadioButtonFor(m => m.RequiredCharacter, "S", new { id = "Req_S" }) 實感型(辨識型)</label>
+                <label id="label_N" style="display:none">@Html.RadioButtonFor(m => m.RequiredCharacter, "N", new { id = "Req_N" }) 直覺型</label>
+                <label id="label_T" style="display:none">@Html.RadioButtonFor(m => m.RequiredCharacter, "T", new { id = "Req_T" }) 思考型(理性)</label>
+                <label id="label_F" style="display:none">@Html.RadioButtonFor(m => m.RequiredCharacter, "F", new { id = "Req_F" }) 情感型(感性)</label>
+                <label id="label_J" style="display:none">@Html.RadioButtonFor(m => m.RequiredCharacter, "J", new { id = "Req_J" }) 判斷型(果斷型)</label>
+                <label id="label_P" style="display:none">@Html.RadioButtonFor(m => m.RequiredCharacter, "P", new { id = "Req_P" }) 感知型(熟思型)</label>
+                <label>@Html.RadioButtonFor(m => m.RequiredCharacter, "NONE") 其實沒有耶！我很free的~~</label>
+
+                <input class="submit" type="submit" value="下一步">
+            }
+        </div>
+    </div>
+</div>
+@*<p>選項敘述參考：<a href="https://csc.nutc.edu.tw/bin/home.php"><b>國立臺中科技大學職涯及諮商輔導中心</b></a>，完整測驗內容<a href="https://csc.nutc.edu.tw/ezfiles/34/1034/img/1292/175552181.pdf">點此處</a>。</p>*@
+
+<script src="~/Scripts/MBITJS.js"></script>
+
+

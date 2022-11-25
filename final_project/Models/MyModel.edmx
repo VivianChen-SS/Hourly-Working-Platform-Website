@@ -1,0 +1,1400 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="finalprojectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="isConfirmed" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COMPANY">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Tel" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Industry" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Intro" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="COMPANY_COMPANYFEATURETAB_JUNCTION">
+          <Key>
+            <PropertyRef Name="CompanyFeatureTabID" />
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyFeatureTabID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CompanyID" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COMPANYFEATURETAB">
+          <Key>
+            <PropertyRef Name="CompanyFeatureTabID" />
+          </Key>
+          <Property Name="CompanyFeatureTabID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CompanyFeature" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EMPLOYER">
+          <Key>
+            <PropertyRef Name="EmployerID" />
+          </Key>
+          <Property Name="EmployerID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="Tel" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Birthday" Type="date" Nullable="false" />
+          <Property Name="CompanyID" Type="nvarchar" MaxLength="20" />
+          <Property Name="Acknowledge" Type="nvarchar(max)" />
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ImageData" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="EVENT">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Time_Start" Type="time" Precision="0" Nullable="false" />
+          <Property Name="Time_End" Type="time" Precision="0" />
+          <Property Name="Tel" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="NumberOfWorkers" Type="int" Nullable="false" />
+          <Property Name="LackofWorkers" Type="int" Nullable="false" />
+          <Property Name="EmployerID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Wage_byHour" Type="int" />
+          <Property Name="Wage_byOthers" Type="nvarchar" MaxLength="300" />
+          <Property Name="maxResumeNumber" Type="int" />
+          <Property Name="Abouts" Type="nvarchar(max)" />
+          <Property Name="OffListTime" Type="datetime" Nullable="false" />
+          <Property Name="Finished" Type="bit" Nullable="false" />
+          <Property Name="I" Type="bit" Nullable="false" />
+          <Property Name="E" Type="bit" Nullable="false" />
+          <Property Name="N" Type="bit" Nullable="false" />
+          <Property Name="S" Type="bit" Nullable="false" />
+          <Property Name="T" Type="bit" Nullable="false" />
+          <Property Name="F" Type="bit" Nullable="false" />
+          <Property Name="P" Type="bit" Nullable="false" />
+          <Property Name="J" Type="bit" Nullable="false" />
+          <Property Name="RequiredCharacter" Type="nvarchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EVENT_EVENTTAB_JUNCTION">
+          <Key>
+            <PropertyRef Name="EventTabID" />
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventTabID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="EventID" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EVENT_REQUIREDSKILLTAB_JUNCTION">
+          <Key>
+            <PropertyRef Name="EventID" />
+            <PropertyRef Name="RequiredSkillTabID" />
+          </Key>
+          <Property Name="EventID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="RequiredSkillTabID" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EVENT_SKILLTAB_JUNCTION">
+          <Key>
+            <PropertyRef Name="EventID" />
+            <PropertyRef Name="SkillTabID" />
+          </Key>
+          <Property Name="EventID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SkillTabID" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EVENT_WORKER_JUNCTION">
+          <Key>
+            <PropertyRef Name="EventID" />
+            <PropertyRef Name="WorkerID" />
+          </Key>
+          <Property Name="EventID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="WorkerID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Hire" Type="bit" Nullable="false" />
+          <Property Name="Finished" Type="bit" Nullable="false" />
+          <Property Name="HireDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="EVENTTAB">
+          <Key>
+            <PropertyRef Name="EventTabID" />
+          </Key>
+          <Property Name="EventTabID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="EventName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REQUIREDSKILLTAB">
+          <Key>
+            <PropertyRef Name="RequiredSkillTabID" />
+          </Key>
+          <Property Name="RequiredSkillTabID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="RequiredSkillName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SKILLTAB">
+          <Key>
+            <PropertyRef Name="SkillTabID" />
+          </Key>
+          <Property Name="SkillTabID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SkillName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WORKER">
+          <Key>
+            <PropertyRef Name="WorkerID" />
+          </Key>
+          <Property Name="WorkerID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PhotoRoute" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Tel" Type="nchar" MaxLength="10" />
+          <Property Name="Birthday" Type="date" Nullable="false" />
+          <Property Name="School" Type="nvarchar" MaxLength="300" />
+          <Property Name="GraduationStatus" Type="nvarchar" MaxLength="100" />
+          <Property Name="SelfInfo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ProjectName_1" Type="nvarchar" MaxLength="300" />
+          <Property Name="ProjectLink_1" Type="nvarchar(max)" />
+          <Property Name="ProjectName_2" Type="nvarchar" MaxLength="300" />
+          <Property Name="ProjectLink_2" Type="nvarchar(max)" />
+          <Property Name="ProjectDescription" Type="nvarchar(max)" />
+          <Property Name="SkillTabID" Type="nvarchar" MaxLength="20" />
+          <Property Name="WorkExperience" Type="nvarchar(max)" />
+          <Property Name="ImageData" Type="varbinary(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="I" Type="bit" />
+          <Property Name="E" Type="bit" />
+          <Property Name="N" Type="bit" />
+          <Property Name="S" Type="bit" />
+          <Property Name="T" Type="bit" />
+          <Property Name="F" Type="bit" />
+          <Property Name="P" Type="bit" />
+          <Property Name="J" Type="bit" />
+        </EntityType>
+        <EntityType Name="WORKER_EVENTTAB_JUNCTION">
+          <Key>
+            <PropertyRef Name="WorkerID" />
+            <PropertyRef Name="EventTabID" />
+          </Key>
+          <Property Name="WorkerID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="EventTabID" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WORKER_REQUIREDSKILLTAB_JUNCTION">
+          <Key>
+            <PropertyRef Name="WorkerID" />
+            <PropertyRef Name="RequiredSkillTabID" />
+          </Key>
+          <Property Name="WorkerID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="RequiredSkillTabID" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WORKER_SKILLTAB_JUNCTION">
+          <Key>
+            <PropertyRef Name="WorkerID" />
+            <PropertyRef Name="SkillTabID" />
+          </Key>
+          <Property Name="WorkerID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SkillTabID" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'finalproject.dbo.WorkExperience' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="WorkExperience">
+          <Key>
+            <PropertyRef Name="WorkerID" />
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="WorkerID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="EventID" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_COMPANY_COMPANYFEATURETAB_JUNCTION_COMPANY">
+          <End Role="COMPANY" Type="Self.COMPANY" Multiplicity="1" />
+          <End Role="COMPANY_COMPANYFEATURETAB_JUNCTION" Type="Self.COMPANY_COMPANYFEATURETAB_JUNCTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPANY">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="COMPANY_COMPANYFEATURETAB_JUNCTION">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COMPANY_COMPANYFEATURETAB_JUNCTION_COMPANYFEATURETAB">
+          <End Role="COMPANYFEATURETAB" Type="Self.COMPANYFEATURETAB" Multiplicity="1" />
+          <End Role="COMPANY_COMPANYFEATURETAB_JUNCTION" Type="Self.COMPANY_COMPANYFEATURETAB_JUNCTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPANYFEATURETAB">
+              <PropertyRef Name="CompanyFeatureTabID" />
+            </Principal>
+            <Dependent Role="COMPANY_COMPANYFEATURETAB_JUNCTION">
+              <PropertyRef Name="CompanyFeatureTabID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLOYER_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="EMPLOYER" Type="Self.EMPLOYER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EMPLOYER">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLOYER_COMPANY">
+          <End Role="COMPANY" Type="Self.COMPANY" Multiplicity="0..1" />
+          <End Role="EMPLOYER" Type="Self.EMPLOYER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPANY">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="EMPLOYER">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVENT_EMPLOYER">
+          <End Role="EMPLOYER" Type="Self.EMPLOYER" Multiplicity="1" />
+          <End Role="EVENT" Type="Self.EVENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYER">
+              <PropertyRef Name="EmployerID" />
+            </Principal>
+            <Dependent Role="EVENT">
+              <PropertyRef Name="EmployerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVENT_EVENTTAB_JUNCTION_EVENT">
+          <End Role="EVENT" Type="Self.EVENT" Multiplicity="1" />
+          <End Role="EVENT_EVENTTAB_JUNCTION" Type="Self.EVENT_EVENTTAB_JUNCTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVENT">
+              <PropertyRef Name="EventID" />
+            </Principal>
+            <Dependent Role="EVENT_EVENTTAB_JUNCTION">
+              <PropertyRef Name="EventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVENT_EVENTTAB_JUNCTION_EVENTTAB">
+          <End Role="EVENTTAB" Type="Self.EVENTTAB" Multiplicity="1" />
+          <End Role="EVENT_EVENTTAB_JUNCTION" Type="Self.EVENT_EVENTTAB_JUNCTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVENTTAB">
+              <PropertyRef Name="EventTabID" />
+            </Principal>
+            <Dependent Role="EVENT_EVENTTAB_JUNCTION">
+              <PropertyRef Name="EventTabID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVENT_REQUIREDSKILLTAB_JUNCTION_EVENT">
+          <End Role="EVENT" Type="Self.EVENT" Multiplicity="1" />
+          <End Role="EVENT_REQUIREDSKILLTAB_JUNCTION" Type="Self.EVENT_REQUIREDSKILLTAB_JUNCTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVENT">
+              <PropertyRef Name="EventID" />
+            </Principal>
+            <Dependent Role="EVENT_REQUIREDSKILLTAB_JUNCTION">
+              <PropertyRef Name="EventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVENT_REQUIREDSKILLTAB_JUNCTION_REQUIREDSKILLTAB">
+          <End Role="REQUIREDSKILLTAB" Type="Self.REQUIREDSKILLTAB" Multiplicity="1" />
+          <End Role="EVENT_REQUIREDSKILLTAB_JUNCTION" Type="Self.EVENT_REQUIREDSKILLTAB_JUNCTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REQUIREDSKILLTAB">
+              <PropertyRef Name="RequiredSkillTabID" />
+            </Principal>
+            <Dependent Role="EVENT_REQUIREDSKILLTAB_JUNCTION">
+              <PropertyRef Name="RequiredSkillTabID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVENT_SKILLTAB_JUNCTION_EVENT">
+          <End Role="EVENT" Type="Self.EVENT" Multiplicity="1" />
+          <End Role="EVENT_SKILLTAB_JUNCTION" Type="Self.EVENT_SKILLTAB_JUNCTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVENT">
+              <PropertyRef Name="EventID" />
+            </Principal>
+            <Dependent Role="EVENT_SKILLTAB_JUNCTION">
+              <PropertyRef Name="EventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVENT_SKILLTAB_JUNCTION_SKILLTAB">
+          <End Role="SKILLTAB" Type="Self.SKILLTAB" Multiplicity="1" />
+          <End Role="EVENT_SKILLTAB_JUNCTION" Type="Self.EVENT_SKILLTAB_JUNCTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SKILLTAB">
+              <PropertyRef Name="SkillTabID" />
+            </Principal>
+            <Dependent Role="EVENT_SKILLTAB_JUNCTION">
+              <PropertyRef Name="SkillTabID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVENT_WORKER_JUNCTION_EVENT">
+          <End Role="EVENT" Type="Self.EVENT" Multiplicity="1" />
+          <End Role="EVENT_WORKER_JUNCTION" Type="Self.EVENT_WORKER_JUNCTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVENT">
+              <PropertyRef Name="EventID" />
+            </Principal>
+            <Dependent Role="EVENT_WORKER_JUNCTION">
+              <PropertyRef Name="EventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVENT_WORKER_JUNCTION_WORKER">
+          <End Role="WORKER" Type="Self.WORKER" Multiplicity="1" />
+          <End Role="EVENT_WORKER_JUNCTION" Type="Self.EVENT_WORKER_JUNCTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WORKER">
+              <PropertyRef Name="WorkerID" />
+            </Principal>
+            <Dependent Role="EVENT_WORKER_JUNCTION">
+              <PropertyRef Name="WorkerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERCLAIMS_USERACCOUNT">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERLOGINS_USERACCOUNT">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERROLES_ROLES">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERROLES_USERACCOUNT1">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WORKER_EVENTTAB_JUNCTION_EVENTTAB">
+          <End Role="EVENTTAB" Type="Self.EVENTTAB" Multiplicity="1" />
+          <End Role="WORKER_EVENTTAB_JUNCTION" Type="Self.WORKER_EVENTTAB_JUNCTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVENTTAB">
+              <PropertyRef Name="EventTabID" />
+            </Principal>
+            <Dependent Role="WORKER_EVENTTAB_JUNCTION">
+              <PropertyRef Name="EventTabID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WORKER_EVENTTAB_JUNCTION_WORKER">
+          <End Role="WORKER" Type="Self.WORKER" Multiplicity="1" />
+          <End Role="WORKER_EVENTTAB_JUNCTION" Type="Self.WORKER_EVENTTAB_JUNCTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WORKER">
+              <PropertyRef Name="WorkerID" />
+            </Principal>
+            <Dependent Role="WORKER_EVENTTAB_JUNCTION">
+              <PropertyRef Name="WorkerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WORKER_REQUIREDSKILLTAB_JUNCTION_REQUIREDSKILLTAB">
+          <End Role="REQUIREDSKILLTAB" Type="Self.REQUIREDSKILLTAB" Multiplicity="1" />
+          <End Role="WORKER_REQUIREDSKILLTAB_JUNCTION" Type="Self.WORKER_REQUIREDSKILLTAB_JUNCTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REQUIREDSKILLTAB">
+              <PropertyRef Name="RequiredSkillTabID" />
+            </Principal>
+            <Dependent Role="WORKER_REQUIREDSKILLTAB_JUNCTION">
+              <PropertyRef Name="RequiredSkillTabID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WORKER_REQUIREDSKILLTAB_JUNCTION_WORKER">
+          <End Role="WORKER" Type="Self.WORKER" Multiplicity="1" />
+          <End Role="WORKER_REQUIREDSKILLTAB_JUNCTION" Type="Self.WORKER_REQUIREDSKILLTAB_JUNCTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WORKER">
+              <PropertyRef Name="WorkerID" />
+            </Principal>
+            <Dependent Role="WORKER_REQUIREDSKILLTAB_JUNCTION">
+              <PropertyRef Name="WorkerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WORKER_SKILLTAB_JUNCTION_SKILLTAB">
+          <End Role="SKILLTAB" Type="Self.SKILLTAB" Multiplicity="1" />
+          <End Role="WORKER_SKILLTAB_JUNCTION" Type="Self.WORKER_SKILLTAB_JUNCTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SKILLTAB">
+              <PropertyRef Name="SkillTabID" />
+            </Principal>
+            <Dependent Role="WORKER_SKILLTAB_JUNCTION">
+              <PropertyRef Name="SkillTabID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WORKER_SKILLTAB_JUNCTION_WORKER">
+          <End Role="WORKER" Type="Self.WORKER" Multiplicity="1" />
+          <End Role="WORKER_SKILLTAB_JUNCTION" Type="Self.WORKER_SKILLTAB_JUNCTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WORKER">
+              <PropertyRef Name="WorkerID" />
+            </Principal>
+            <Dependent Role="WORKER_SKILLTAB_JUNCTION">
+              <PropertyRef Name="WorkerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkExperience_EVENT">
+          <End Role="EVENT" Type="Self.EVENT" Multiplicity="1" />
+          <End Role="WorkExperience" Type="Self.WorkExperience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVENT">
+              <PropertyRef Name="EventID" />
+            </Principal>
+            <Dependent Role="WorkExperience">
+              <PropertyRef Name="EventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkExperience_WORKER">
+          <End Role="WORKER" Type="Self.WORKER" Multiplicity="1" />
+          <End Role="WorkExperience" Type="Self.WorkExperience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WORKER">
+              <PropertyRef Name="WorkerID" />
+            </Principal>
+            <Dependent Role="WorkExperience">
+              <PropertyRef Name="WorkerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="finalprojectModelStoreContainer">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMPANY" EntityType="Self.COMPANY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMPANY_COMPANYFEATURETAB_JUNCTION" EntityType="Self.COMPANY_COMPANYFEATURETAB_JUNCTION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMPANYFEATURETAB" EntityType="Self.COMPANYFEATURETAB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPLOYER" EntityType="Self.EMPLOYER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EVENT" EntityType="Self.EVENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EVENT_EVENTTAB_JUNCTION" EntityType="Self.EVENT_EVENTTAB_JUNCTION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EVENT_REQUIREDSKILLTAB_JUNCTION" EntityType="Self.EVENT_REQUIREDSKILLTAB_JUNCTION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EVENT_SKILLTAB_JUNCTION" EntityType="Self.EVENT_SKILLTAB_JUNCTION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EVENT_WORKER_JUNCTION" EntityType="Self.EVENT_WORKER_JUNCTION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EVENTTAB" EntityType="Self.EVENTTAB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REQUIREDSKILLTAB" EntityType="Self.REQUIREDSKILLTAB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SKILLTAB" EntityType="Self.SKILLTAB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WORKER" EntityType="Self.WORKER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WORKER_EVENTTAB_JUNCTION" EntityType="Self.WORKER_EVENTTAB_JUNCTION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WORKER_REQUIREDSKILLTAB_JUNCTION" EntityType="Self.WORKER_REQUIREDSKILLTAB_JUNCTION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WORKER_SKILLTAB_JUNCTION" EntityType="Self.WORKER_SKILLTAB_JUNCTION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkExperience" EntityType="Self.WorkExperience" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [WorkExperience].[WorkerID] AS [WorkerID], 
+    [WorkExperience].[EventID] AS [EventID]
+    FROM [dbo].[WorkExperience] AS [WorkExperience]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_COMPANY_COMPANYFEATURETAB_JUNCTION_COMPANY" Association="Self.FK_COMPANY_COMPANYFEATURETAB_JUNCTION_COMPANY">
+            <End Role="COMPANY" EntitySet="COMPANY" />
+            <End Role="COMPANY_COMPANYFEATURETAB_JUNCTION" EntitySet="COMPANY_COMPANYFEATURETAB_JUNCTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMPANY_COMPANYFEATURETAB_JUNCTION_COMPANYFEATURETAB" Association="Self.FK_COMPANY_COMPANYFEATURETAB_JUNCTION_COMPANYFEATURETAB">
+            <End Role="COMPANYFEATURETAB" EntitySet="COMPANYFEATURETAB" />
+            <End Role="COMPANY_COMPANYFEATURETAB_JUNCTION" EntitySet="COMPANY_COMPANYFEATURETAB_JUNCTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLOYER_AspNetUsers" Association="Self.FK_EMPLOYER_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="EMPLOYER" EntitySet="EMPLOYER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLOYER_COMPANY" Association="Self.FK_EMPLOYER_COMPANY">
+            <End Role="COMPANY" EntitySet="COMPANY" />
+            <End Role="EMPLOYER" EntitySet="EMPLOYER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVENT_EMPLOYER" Association="Self.FK_EVENT_EMPLOYER">
+            <End Role="EMPLOYER" EntitySet="EMPLOYER" />
+            <End Role="EVENT" EntitySet="EVENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVENT_EVENTTAB_JUNCTION_EVENT" Association="Self.FK_EVENT_EVENTTAB_JUNCTION_EVENT">
+            <End Role="EVENT" EntitySet="EVENT" />
+            <End Role="EVENT_EVENTTAB_JUNCTION" EntitySet="EVENT_EVENTTAB_JUNCTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVENT_EVENTTAB_JUNCTION_EVENTTAB" Association="Self.FK_EVENT_EVENTTAB_JUNCTION_EVENTTAB">
+            <End Role="EVENTTAB" EntitySet="EVENTTAB" />
+            <End Role="EVENT_EVENTTAB_JUNCTION" EntitySet="EVENT_EVENTTAB_JUNCTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVENT_REQUIREDSKILLTAB_JUNCTION_EVENT" Association="Self.FK_EVENT_REQUIREDSKILLTAB_JUNCTION_EVENT">
+            <End Role="EVENT" EntitySet="EVENT" />
+            <End Role="EVENT_REQUIREDSKILLTAB_JUNCTION" EntitySet="EVENT_REQUIREDSKILLTAB_JUNCTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVENT_REQUIREDSKILLTAB_JUNCTION_REQUIREDSKILLTAB" Association="Self.FK_EVENT_REQUIREDSKILLTAB_JUNCTION_REQUIREDSKILLTAB">
+            <End Role="REQUIREDSKILLTAB" EntitySet="REQUIREDSKILLTAB" />
+            <End Role="EVENT_REQUIREDSKILLTAB_JUNCTION" EntitySet="EVENT_REQUIREDSKILLTAB_JUNCTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVENT_SKILLTAB_JUNCTION_EVENT" Association="Self.FK_EVENT_SKILLTAB_JUNCTION_EVENT">
+            <End Role="EVENT" EntitySet="EVENT" />
+            <End Role="EVENT_SKILLTAB_JUNCTION" EntitySet="EVENT_SKILLTAB_JUNCTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVENT_SKILLTAB_JUNCTION_SKILLTAB" Association="Self.FK_EVENT_SKILLTAB_JUNCTION_SKILLTAB">
+            <End Role="SKILLTAB" EntitySet="SKILLTAB" />
+            <End Role="EVENT_SKILLTAB_JUNCTION" EntitySet="EVENT_SKILLTAB_JUNCTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVENT_WORKER_JUNCTION_EVENT" Association="Self.FK_EVENT_WORKER_JUNCTION_EVENT">
+            <End Role="EVENT" EntitySet="EVENT" />
+            <End Role="EVENT_WORKER_JUNCTION" EntitySet="EVENT_WORKER_JUNCTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVENT_WORKER_JUNCTION_WORKER" Association="Self.FK_EVENT_WORKER_JUNCTION_WORKER">
+            <End Role="WORKER" EntitySet="WORKER" />
+            <End Role="EVENT_WORKER_JUNCTION" EntitySet="EVENT_WORKER_JUNCTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERCLAIMS_USERACCOUNT" Association="Self.FK_USERCLAIMS_USERACCOUNT">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERLOGINS_USERACCOUNT" Association="Self.FK_USERLOGINS_USERACCOUNT">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERROLES_ROLES" Association="Self.FK_USERROLES_ROLES">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERROLES_USERACCOUNT1" Association="Self.FK_USERROLES_USERACCOUNT1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WORKER_EVENTTAB_JUNCTION_EVENTTAB" Association="Self.FK_WORKER_EVENTTAB_JUNCTION_EVENTTAB">
+            <End Role="EVENTTAB" EntitySet="EVENTTAB" />
+            <End Role="WORKER_EVENTTAB_JUNCTION" EntitySet="WORKER_EVENTTAB_JUNCTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WORKER_EVENTTAB_JUNCTION_WORKER" Association="Self.FK_WORKER_EVENTTAB_JUNCTION_WORKER">
+            <End Role="WORKER" EntitySet="WORKER" />
+            <End Role="WORKER_EVENTTAB_JUNCTION" EntitySet="WORKER_EVENTTAB_JUNCTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WORKER_REQUIREDSKILLTAB_JUNCTION_REQUIREDSKILLTAB" Association="Self.FK_WORKER_REQUIREDSKILLTAB_JUNCTION_REQUIREDSKILLTAB">
+            <End Role="REQUIREDSKILLTAB" EntitySet="REQUIREDSKILLTAB" />
+            <End Role="WORKER_REQUIREDSKILLTAB_JUNCTION" EntitySet="WORKER_REQUIREDSKILLTAB_JUNCTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WORKER_REQUIREDSKILLTAB_JUNCTION_WORKER" Association="Self.FK_WORKER_REQUIREDSKILLTAB_JUNCTION_WORKER">
+            <End Role="WORKER" EntitySet="WORKER" />
+            <End Role="WORKER_REQUIREDSKILLTAB_JUNCTION" EntitySet="WORKER_REQUIREDSKILLTAB_JUNCTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WORKER_SKILLTAB_JUNCTION_SKILLTAB" Association="Self.FK_WORKER_SKILLTAB_JUNCTION_SKILLTAB">
+            <End Role="SKILLTAB" EntitySet="SKILLTAB" />
+            <End Role="WORKER_SKILLTAB_JUNCTION" EntitySet="WORKER_SKILLTAB_JUNCTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WORKER_SKILLTAB_JUNCTION_WORKER" Association="Self.FK_WORKER_SKILLTAB_JUNCTION_WORKER">
+            <End Role="WORKER" EntitySet="WORKER" />
+            <End Role="WORKER_SKILLTAB_JUNCTION" EntitySet="WORKER_SKILLTAB_JUNCTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkExperience_EVENT" Association="Self.FK_WorkExperience_EVENT">
+            <End Role="EVENT" EntitySet="EVENT" />
+            <End Role="WorkExperience" EntitySet="WorkExperience" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkExperience_WORKER" Association="Self.FK_WorkExperience_WORKER">
+            <End Role="WORKER" EntitySet="WORKER" />
+            <End Role="WorkExperience" EntitySet="WorkExperience" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="finalprojectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="finalprojectEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetRoles" EntityType="finalprojectModel.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="finalprojectModel.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="finalprojectModel.AspNetUserLogin" />
+          <EntitySet Name="AspNetUserRoles" EntityType="finalprojectModel.AspNetUserRole" />
+          <EntitySet Name="AspNetUsers" EntityType="finalprojectModel.AspNetUser" />
+          <EntitySet Name="COMPANies" EntityType="finalprojectModel.COMPANY" />
+          <EntitySet Name="COMPANYFEATURETABs" EntityType="finalprojectModel.COMPANYFEATURETAB" />
+          <EntitySet Name="EMPLOYERs" EntityType="finalprojectModel.EMPLOYER" />
+          <EntitySet Name="EVENTs" EntityType="finalprojectModel.EVENT" />
+          <EntitySet Name="EVENT_WORKER_JUNCTION" EntityType="finalprojectModel.EVENT_WORKER_JUNCTION" />
+          <EntitySet Name="EVENTTABs" EntityType="finalprojectModel.EVENTTAB" />
+          <EntitySet Name="SKILLTABs" EntityType="finalprojectModel.SKILLTAB" />
+          <EntitySet Name="WORKERs" EntityType="finalprojectModel.WORKER" />
+          <AssociationSet Name="FK_USERROLES_ROLES" Association="finalprojectModel.FK_USERROLES_ROLES">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRole" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERCLAIMS_USERACCOUNT" Association="finalprojectModel.FK_USERCLAIMS_USERACCOUNT">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERLOGINS_USERACCOUNT" Association="finalprojectModel.FK_USERLOGINS_USERACCOUNT">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERROLES_USERACCOUNT1" Association="finalprojectModel.FK_USERROLES_USERACCOUNT1">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRole" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLOYER_AspNetUsers" Association="finalprojectModel.FK_EMPLOYER_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="EMPLOYER" EntitySet="EMPLOYERs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLOYER_COMPANY" Association="finalprojectModel.FK_EMPLOYER_COMPANY">
+            <End Role="COMPANY" EntitySet="COMPANies" />
+            <End Role="EMPLOYER" EntitySet="EMPLOYERs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVENT_EMPLOYER" Association="finalprojectModel.FK_EVENT_EMPLOYER">
+            <End Role="EMPLOYER" EntitySet="EMPLOYERs" />
+            <End Role="EVENT" EntitySet="EVENTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVENT_WORKER_JUNCTION_EVENT" Association="finalprojectModel.FK_EVENT_WORKER_JUNCTION_EVENT">
+            <End Role="EVENT" EntitySet="EVENTs" />
+            <End Role="EVENT_WORKER_JUNCTION" EntitySet="EVENT_WORKER_JUNCTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVENT_WORKER_JUNCTION_WORKER" Association="finalprojectModel.FK_EVENT_WORKER_JUNCTION_WORKER">
+            <End Role="WORKER" EntitySet="WORKERs" />
+            <End Role="EVENT_WORKER_JUNCTION" EntitySet="EVENT_WORKER_JUNCTION" />
+          </AssociationSet>
+          <AssociationSet Name="COMPANY_COMPANYFEATURETAB_JUNCTION" Association="finalprojectModel.COMPANY_COMPANYFEATURETAB_JUNCTION">
+            <End Role="COMPANY" EntitySet="COMPANies" />
+            <End Role="COMPANYFEATURETAB" EntitySet="COMPANYFEATURETABs" />
+          </AssociationSet>
+          <AssociationSet Name="EVENT_EVENTTAB_JUNCTION" Association="finalprojectModel.EVENT_EVENTTAB_JUNCTION">
+            <End Role="EVENT" EntitySet="EVENTs" />
+            <End Role="EVENTTAB" EntitySet="EVENTTABs" />
+          </AssociationSet>
+          <AssociationSet Name="EVENT_SKILLTAB_JUNCTION" Association="finalprojectModel.EVENT_SKILLTAB_JUNCTION">
+            <End Role="EVENT" EntitySet="EVENTs" />
+            <End Role="SKILLTAB" EntitySet="SKILLTABs" />
+          </AssociationSet>
+          <AssociationSet Name="WORKER_EVENTTAB_JUNCTION" Association="finalprojectModel.WORKER_EVENTTAB_JUNCTION">
+            <End Role="EVENTTAB" EntitySet="EVENTTABs" />
+            <End Role="WORKER" EntitySet="WORKERs" />
+          </AssociationSet>
+          <AssociationSet Name="WORKER_SKILLTAB_JUNCTION" Association="finalprojectModel.WORKER_SKILLTAB_JUNCTION">
+            <End Role="SKILLTAB" EntitySet="SKILLTABs" />
+            <End Role="WORKER" EntitySet="WORKERs" />
+          </AssociationSet>
+          <AssociationSet Name="WorkExperience" Association="finalprojectModel.WorkExperience">
+            <End Role="EVENT" EntitySet="EVENTs" />
+            <End Role="WORKER" EntitySet="WORKERs" />
+          </AssociationSet>
+          <EntitySet Name="REQUIREDSKILLTABs" EntityType="finalprojectModel.REQUIREDSKILLTAB" />
+          <AssociationSet Name="EVENT_REQUIREDSKILLTAB_JUNCTION" Association="finalprojectModel.EVENT_REQUIREDSKILLTAB_JUNCTION">
+            <End Role="EVENT" EntitySet="EVENTs" />
+            <End Role="REQUIREDSKILLTAB" EntitySet="REQUIREDSKILLTABs" />
+          </AssociationSet>
+          <AssociationSet Name="WORKER_REQUIREDSKILLTAB_JUNCTION" Association="finalprojectModel.WORKER_REQUIREDSKILLTAB_JUNCTION">
+            <End Role="REQUIREDSKILLTAB" EntitySet="REQUIREDSKILLTABs" />
+            <End Role="WORKER" EntitySet="WORKERs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserRoles" Relationship="finalprojectModel.FK_USERROLES_ROLES" FromRole="AspNetRole" ToRole="AspNetUserRole" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="finalprojectModel.FK_USERCLAIMS_USERACCOUNT" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="finalprojectModel.FK_USERLOGINS_USERACCOUNT" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserRole">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetRole" Relationship="finalprojectModel.FK_USERROLES_ROLES" FromRole="AspNetUserRole" ToRole="AspNetRole" />
+          <NavigationProperty Name="AspNetUser" Relationship="finalprojectModel.FK_USERROLES_USERACCOUNT1" FromRole="AspNetUserRole" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="isConfirmed" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="finalprojectModel.FK_USERCLAIMS_USERACCOUNT" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="finalprojectModel.FK_USERLOGINS_USERACCOUNT" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="AspNetUserRoles" Relationship="finalprojectModel.FK_USERROLES_USERACCOUNT1" FromRole="AspNetUser" ToRole="AspNetUserRole" />
+          <NavigationProperty Name="EMPLOYERs" Relationship="finalprojectModel.FK_EMPLOYER_AspNetUsers" FromRole="AspNetUser" ToRole="EMPLOYER" />
+        </EntityType>
+        <EntityType Name="COMPANY">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Tel" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Industry" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Intro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EMPLOYERs" Relationship="finalprojectModel.FK_EMPLOYER_COMPANY" FromRole="COMPANY" ToRole="EMPLOYER" />
+          <NavigationProperty Name="COMPANYFEATURETABs" Relationship="finalprojectModel.COMPANY_COMPANYFEATURETAB_JUNCTION" FromRole="COMPANY" ToRole="COMPANYFEATURETAB" />
+        </EntityType>
+        <EntityType Name="COMPANYFEATURETAB">
+          <Key>
+            <PropertyRef Name="CompanyFeatureTabID" />
+          </Key>
+          <Property Name="CompanyFeatureTabID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyFeature" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="COMPANies" Relationship="finalprojectModel.COMPANY_COMPANYFEATURETAB_JUNCTION" FromRole="COMPANYFEATURETAB" ToRole="COMPANY" />
+        </EntityType>
+        <EntityType Name="EMPLOYER">
+          <Key>
+            <PropertyRef Name="EmployerID" />
+          </Key>
+          <Property Name="EmployerID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Tel" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CompanyID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Acknowledge" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="finalprojectModel.FK_EMPLOYER_AspNetUsers" FromRole="EMPLOYER" ToRole="AspNetUser" />
+          <NavigationProperty Name="COMPANY" Relationship="finalprojectModel.FK_EMPLOYER_COMPANY" FromRole="EMPLOYER" ToRole="COMPANY" />
+          <NavigationProperty Name="EVENTs" Relationship="finalprojectModel.FK_EVENT_EMPLOYER" FromRole="EMPLOYER" ToRole="EVENT" />
+        </EntityType>
+        <EntityType Name="EVENT">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Time_Start" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="Time_End" Type="Time" Precision="0" />
+          <Property Name="Tel" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="NumberOfWorkers" Type="Int32" Nullable="false" />
+          <Property Name="EmployerID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Wage_byHour" Type="Int32" />
+          <Property Name="Wage_byOthers" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="maxResumeNumber" Type="Int32" />
+          <Property Name="Abouts" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OffListTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Finished" Type="Boolean" Nullable="false" />
+          <Property Name="I" Type="Boolean" Nullable="false" />
+          <Property Name="E" Type="Boolean" Nullable="false" />
+          <Property Name="N" Type="Boolean" Nullable="false" />
+          <Property Name="S" Type="Boolean" Nullable="false" />
+          <Property Name="T" Type="Boolean" Nullable="false" />
+          <Property Name="F" Type="Boolean" Nullable="false" />
+          <Property Name="P" Type="Boolean" Nullable="false" />
+          <Property Name="J" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="EMPLOYER" Relationship="finalprojectModel.FK_EVENT_EMPLOYER" FromRole="EVENT" ToRole="EMPLOYER" />
+          <NavigationProperty Name="EVENT_WORKER_JUNCTION" Relationship="finalprojectModel.FK_EVENT_WORKER_JUNCTION_EVENT" FromRole="EVENT" ToRole="EVENT_WORKER_JUNCTION" />
+          <NavigationProperty Name="EVENTTABs" Relationship="finalprojectModel.EVENT_EVENTTAB_JUNCTION" FromRole="EVENT" ToRole="EVENTTAB" />
+          <NavigationProperty Name="SKILLTABs" Relationship="finalprojectModel.EVENT_SKILLTAB_JUNCTION" FromRole="EVENT" ToRole="SKILLTAB" />
+          <NavigationProperty Name="WORKERs" Relationship="finalprojectModel.WorkExperience" FromRole="EVENT" ToRole="WORKER" />
+          <Property Name="RequiredCharacter" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="REQUIREDSKILLTABs" Relationship="finalprojectModel.EVENT_REQUIREDSKILLTAB_JUNCTION" FromRole="EVENT" ToRole="REQUIREDSKILLTAB" />
+          <Property Name="LackofWorkers" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EVENT_WORKER_JUNCTION">
+          <Key>
+            <PropertyRef Name="EventID" />
+            <PropertyRef Name="WorkerID" />
+          </Key>
+          <Property Name="EventID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="WorkerID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Hire" Type="Boolean" Nullable="false" />
+          <Property Name="Finished" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="EVENT" Relationship="finalprojectModel.FK_EVENT_WORKER_JUNCTION_EVENT" FromRole="EVENT_WORKER_JUNCTION" ToRole="EVENT" />
+          <NavigationProperty Name="WORKER" Relationship="finalprojectModel.FK_EVENT_WORKER_JUNCTION_WORKER" FromRole="EVENT_WORKER_JUNCTION" ToRole="WORKER" />
+          <Property Name="HireDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="EVENTTAB">
+          <Key>
+            <PropertyRef Name="EventTabID" />
+          </Key>
+          <Property Name="EventTabID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EventName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EVENTs" Relationship="finalprojectModel.EVENT_EVENTTAB_JUNCTION" FromRole="EVENTTAB" ToRole="EVENT" />
+          <NavigationProperty Name="WORKERs" Relationship="finalprojectModel.WORKER_EVENTTAB_JUNCTION" FromRole="EVENTTAB" ToRole="WORKER" />
+        </EntityType>
+        <EntityType Name="SKILLTAB">
+          <Key>
+            <PropertyRef Name="SkillTabID" />
+          </Key>
+          <Property Name="SkillTabID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SkillName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EVENTs" Relationship="finalprojectModel.EVENT_SKILLTAB_JUNCTION" FromRole="SKILLTAB" ToRole="EVENT" />
+          <NavigationProperty Name="WORKERs" Relationship="finalprojectModel.WORKER_SKILLTAB_JUNCTION" FromRole="SKILLTAB" ToRole="WORKER" />
+        </EntityType>
+        <EntityType Name="WORKER">
+          <Key>
+            <PropertyRef Name="WorkerID" />
+          </Key>
+          <Property Name="WorkerID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhotoRoute" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Tel" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="School" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="GraduationStatus" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SelfInfo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectName_1" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectLink_1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectName_2" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectLink_2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SkillTabID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="WorkExperience" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="I" Type="Boolean" />
+          <Property Name="E" Type="Boolean" />
+          <Property Name="N" Type="Boolean" />
+          <Property Name="S" Type="Boolean" />
+          <Property Name="T" Type="Boolean" />
+          <Property Name="F" Type="Boolean" />
+          <Property Name="P" Type="Boolean" />
+          <Property Name="J" Type="Boolean" />
+          <NavigationProperty Name="EVENT_WORKER_JUNCTION" Relationship="finalprojectModel.FK_EVENT_WORKER_JUNCTION_WORKER" FromRole="WORKER" ToRole="EVENT_WORKER_JUNCTION" />
+          <NavigationProperty Name="EVENTTABs" Relationship="finalprojectModel.WORKER_EVENTTAB_JUNCTION" FromRole="WORKER" ToRole="EVENTTAB" />
+          <NavigationProperty Name="SKILLTABs" Relationship="finalprojectModel.WORKER_SKILLTAB_JUNCTION" FromRole="WORKER" ToRole="SKILLTAB" />
+          <NavigationProperty Name="EVENTs" Relationship="finalprojectModel.WorkExperience" FromRole="WORKER" ToRole="EVENT" />
+          <NavigationProperty Name="REQUIREDSKILLTABs" Relationship="finalprojectModel.WORKER_REQUIREDSKILLTAB_JUNCTION" FromRole="WORKER" ToRole="REQUIREDSKILLTAB" />
+        </EntityType>
+        <Association Name="FK_USERROLES_ROLES">
+          <End Type="finalprojectModel.AspNetRole" Role="AspNetRole" Multiplicity="1" />
+          <End Type="finalprojectModel.AspNetUserRole" Role="AspNetUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERCLAIMS_USERACCOUNT">
+          <End Type="finalprojectModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="finalprojectModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaim">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERLOGINS_USERACCOUNT">
+          <End Type="finalprojectModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="finalprojectModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogin">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERROLES_USERACCOUNT1">
+          <End Type="finalprojectModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="finalprojectModel.AspNetUserRole" Role="AspNetUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLOYER_AspNetUsers">
+          <End Type="finalprojectModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="finalprojectModel.EMPLOYER" Role="EMPLOYER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EMPLOYER">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLOYER_COMPANY">
+          <End Type="finalprojectModel.COMPANY" Role="COMPANY" Multiplicity="0..1" />
+          <End Type="finalprojectModel.EMPLOYER" Role="EMPLOYER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPANY">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="EMPLOYER">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVENT_EMPLOYER">
+          <End Type="finalprojectModel.EMPLOYER" Role="EMPLOYER" Multiplicity="1" />
+          <End Type="finalprojectModel.EVENT" Role="EVENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYER">
+              <PropertyRef Name="EmployerID" />
+            </Principal>
+            <Dependent Role="EVENT">
+              <PropertyRef Name="EmployerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVENT_WORKER_JUNCTION_EVENT">
+          <End Type="finalprojectModel.EVENT" Role="EVENT" Multiplicity="1" />
+          <End Type="finalprojectModel.EVENT_WORKER_JUNCTION" Role="EVENT_WORKER_JUNCTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVENT">
+              <PropertyRef Name="EventID" />
+            </Principal>
+            <Dependent Role="EVENT_WORKER_JUNCTION">
+              <PropertyRef Name="EventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVENT_WORKER_JUNCTION_WORKER">
+          <End Type="finalprojectModel.WORKER" Role="WORKER" Multiplicity="1" />
+          <End Type="finalprojectModel.EVENT_WORKER_JUNCTION" Role="EVENT_WORKER_JUNCTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WORKER">
+              <PropertyRef Name="WorkerID" />
+            </Principal>
+            <Dependent Role="EVENT_WORKER_JUNCTION">
+              <PropertyRef Name="WorkerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="COMPANY_COMPANYFEATURETAB_JUNCTION">
+          <End Type="finalprojectModel.COMPANY" Role="COMPANY" Multiplicity="*" />
+          <End Type="finalprojectModel.COMPANYFEATURETAB" Role="COMPANYFEATURETAB" Multiplicity="*" />
+        </Association>
+        <Association Name="EVENT_EVENTTAB_JUNCTION">
+          <End Type="finalprojectModel.EVENT" Role="EVENT" Multiplicity="*" />
+          <End Type="finalprojectModel.EVENTTAB" Role="EVENTTAB" Multiplicity="*" />
+        </Association>
+        <Association Name="EVENT_SKILLTAB_JUNCTION">
+          <End Type="finalprojectModel.EVENT" Role="EVENT" Multiplicity="*" />
+          <End Type="finalprojectModel.SKILLTAB" Role="SKILLTAB" Multiplicity="*" />
+        </Association>
+        <Association Name="WORKER_EVENTTAB_JUNCTION">
+          <End Type="finalprojectModel.EVENTTAB" Role="EVENTTAB" Multiplicity="*" />
+          <End Type="finalprojectModel.WORKER" Role="WORKER" Multiplicity="*" />
+        </Association>
+        <Association Name="WORKER_SKILLTAB_JUNCTION">
+          <End Type="finalprojectModel.SKILLTAB" Role="SKILLTAB" Multiplicity="*" />
+          <End Type="finalprojectModel.WORKER" Role="WORKER" Multiplicity="*" />
+        </Association>
+        <Association Name="WorkExperience">
+          <End Type="finalprojectModel.EVENT" Role="EVENT" Multiplicity="*" />
+          <End Type="finalprojectModel.WORKER" Role="WORKER" Multiplicity="*" />
+        </Association>
+        <EntityType Name="REQUIREDSKILLTAB">
+          <Key>
+            <PropertyRef Name="RequiredSkillTabID" />
+          </Key>
+          <Property Name="RequiredSkillTabID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RequiredSkillName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EVENTs" Relationship="finalprojectModel.EVENT_REQUIREDSKILLTAB_JUNCTION" FromRole="REQUIREDSKILLTAB" ToRole="EVENT" />
+          <NavigationProperty Name="WORKERs" Relationship="finalprojectModel.WORKER_REQUIREDSKILLTAB_JUNCTION" FromRole="REQUIREDSKILLTAB" ToRole="WORKER" />
+        </EntityType>
+        <Association Name="EVENT_REQUIREDSKILLTAB_JUNCTION">
+          <End Type="finalprojectModel.EVENT" Role="EVENT" Multiplicity="*" />
+          <End Type="finalprojectModel.REQUIREDSKILLTAB" Role="REQUIREDSKILLTAB" Multiplicity="*" />
+        </Association>
+        <Association Name="WORKER_REQUIREDSKILLTAB_JUNCTION">
+          <End Type="finalprojectModel.REQUIREDSKILLTAB" Role="REQUIREDSKILLTAB" Multiplicity="*" />
+          <End Type="finalprojectModel.WORKER" Role="WORKER" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="finalprojectModelStoreContainer" CdmEntityContainer="finalprojectEntities">
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="finalprojectModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="finalprojectModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="finalprojectModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserRoles">
+            <EntityTypeMapping TypeName="finalprojectModel.AspNetUserRole">
+              <MappingFragment StoreEntitySet="AspNetUserRoles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="finalprojectModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="isConfirmed" ColumnName="isConfirmed" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMPANies">
+            <EntityTypeMapping TypeName="finalprojectModel.COMPANY">
+              <MappingFragment StoreEntitySet="COMPANY">
+                <ScalarProperty Name="Intro" ColumnName="Intro" />
+                <ScalarProperty Name="Industry" ColumnName="Industry" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMPANYFEATURETABs">
+            <EntityTypeMapping TypeName="finalprojectModel.COMPANYFEATURETAB">
+              <MappingFragment StoreEntitySet="COMPANYFEATURETAB">
+                <ScalarProperty Name="CompanyFeature" ColumnName="CompanyFeature" />
+                <ScalarProperty Name="CompanyFeatureTabID" ColumnName="CompanyFeatureTabID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPLOYERs">
+            <EntityTypeMapping TypeName="finalprojectModel.EMPLOYER">
+              <MappingFragment StoreEntitySet="EMPLOYER">
+                <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Acknowledge" ColumnName="Acknowledge" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EmployerID" ColumnName="EmployerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EVENTs">
+            <EntityTypeMapping TypeName="finalprojectModel.EVENT">
+              <MappingFragment StoreEntitySet="EVENT">
+                <ScalarProperty Name="LackofWorkers" ColumnName="LackofWorkers" />
+                <ScalarProperty Name="RequiredCharacter" ColumnName="RequiredCharacter" />
+                <ScalarProperty Name="J" ColumnName="J" />
+                <ScalarProperty Name="P" ColumnName="P" />
+                <ScalarProperty Name="F" ColumnName="F" />
+                <ScalarProperty Name="T" ColumnName="T" />
+                <ScalarProperty Name="S" ColumnName="S" />
+                <ScalarProperty Name="N" ColumnName="N" />
+                <ScalarProperty Name="E" ColumnName="E" />
+                <ScalarProperty Name="I" ColumnName="I" />
+                <ScalarProperty Name="Finished" ColumnName="Finished" />
+                <ScalarProperty Name="OffListTime" ColumnName="OffListTime" />
+                <ScalarProperty Name="Abouts" ColumnName="Abouts" />
+                <ScalarProperty Name="maxResumeNumber" ColumnName="maxResumeNumber" />
+                <ScalarProperty Name="Wage_byOthers" ColumnName="Wage_byOthers" />
+                <ScalarProperty Name="Wage_byHour" ColumnName="Wage_byHour" />
+                <ScalarProperty Name="EmployerID" ColumnName="EmployerID" />
+                <ScalarProperty Name="NumberOfWorkers" ColumnName="NumberOfWorkers" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Time_End" ColumnName="Time_End" />
+                <ScalarProperty Name="Time_Start" ColumnName="Time_Start" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EVENT_WORKER_JUNCTION">
+            <EntityTypeMapping TypeName="finalprojectModel.EVENT_WORKER_JUNCTION">
+              <MappingFragment StoreEntitySet="EVENT_WORKER_JUNCTION">
+                <ScalarProperty Name="HireDateTime" ColumnName="HireDateTime" />
+                <ScalarProperty Name="Finished" ColumnName="Finished" />
+                <ScalarProperty Name="Hire" ColumnName="Hire" />
+                <ScalarProperty Name="WorkerID" ColumnName="WorkerID" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EVENTTABs">
+            <EntityTypeMapping TypeName="finalprojectModel.EVENTTAB">
+              <MappingFragment StoreEntitySet="EVENTTAB">
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="EventTabID" ColumnName="EventTabID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SKILLTABs">
+            <EntityTypeMapping TypeName="finalprojectModel.SKILLTAB">
+              <MappingFragment StoreEntitySet="SKILLTAB">
+                <ScalarProperty Name="SkillName" ColumnName="SkillName" />
+                <ScalarProperty Name="SkillTabID" ColumnName="SkillTabID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WORKERs">
+            <EntityTypeMapping TypeName="finalprojectModel.WORKER">
+              <MappingFragment StoreEntitySet="WORKER">
+                <ScalarProperty Name="J" ColumnName="J" />
+                <ScalarProperty Name="P" ColumnName="P" />
+                <ScalarProperty Name="F" ColumnName="F" />
+                <ScalarProperty Name="T" ColumnName="T" />
+                <ScalarProperty Name="S" ColumnName="S" />
+                <ScalarProperty Name="N" ColumnName="N" />
+                <ScalarProperty Name="E" ColumnName="E" />
+                <ScalarProperty Name="I" ColumnName="I" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+                <ScalarProperty Name="WorkExperience" ColumnName="WorkExperience" />
+                <ScalarProperty Name="SkillTabID" ColumnName="SkillTabID" />
+                <ScalarProperty Name="ProjectDescription" ColumnName="ProjectDescription" />
+                <ScalarProperty Name="ProjectLink_2" ColumnName="ProjectLink_2" />
+                <ScalarProperty Name="ProjectName_2" ColumnName="ProjectName_2" />
+                <ScalarProperty Name="ProjectLink_1" ColumnName="ProjectLink_1" />
+                <ScalarProperty Name="ProjectName_1" ColumnName="ProjectName_1" />
+                <ScalarProperty Name="SelfInfo" ColumnName="SelfInfo" />
+                <ScalarProperty Name="GraduationStatus" ColumnName="GraduationStatus" />
+                <ScalarProperty Name="School" ColumnName="School" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="PhotoRoute" ColumnName="PhotoRoute" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="WorkerID" ColumnName="WorkerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="COMPANY_COMPANYFEATURETAB_JUNCTION" TypeName="finalprojectModel.COMPANY_COMPANYFEATURETAB_JUNCTION" StoreEntitySet="COMPANY_COMPANYFEATURETAB_JUNCTION">
+            <EndProperty Name="COMPANYFEATURETAB">
+              <ScalarProperty Name="CompanyFeatureTabID" ColumnName="CompanyFeatureTabID" />
+            </EndProperty>
+            <EndProperty Name="COMPANY">
+              <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="EVENT_EVENTTAB_JUNCTION" TypeName="finalprojectModel.EVENT_EVENTTAB_JUNCTION" StoreEntitySet="EVENT_EVENTTAB_JUNCTION">
+            <EndProperty Name="EVENTTAB">
+              <ScalarProperty Name="EventTabID" ColumnName="EventTabID" />
+            </EndProperty>
+            <EndProperty Name="EVENT">
+              <ScalarProperty Name="EventID" ColumnName="EventID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="EVENT_SKILLTAB_JUNCTION" TypeName="finalprojectModel.EVENT_SKILLTAB_JUNCTION" StoreEntitySet="EVENT_SKILLTAB_JUNCTION">
+            <EndProperty Name="SKILLTAB">
+              <ScalarProperty Name="SkillTabID" ColumnName="SkillTabID" />
+            </EndProperty>
+            <EndProperty Name="EVENT">
+              <ScalarProperty Name="EventID" ColumnName="EventID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="WORKER_EVENTTAB_JUNCTION" TypeName="finalprojectModel.WORKER_EVENTTAB_JUNCTION" StoreEntitySet="WORKER_EVENTTAB_JUNCTION">
+            <EndProperty Name="WORKER">
+              <ScalarProperty Name="WorkerID" ColumnName="WorkerID" />
+            </EndProperty>
+            <EndProperty Name="EVENTTAB">
+              <ScalarProperty Name="EventTabID" ColumnName="EventTabID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="WORKER_SKILLTAB_JUNCTION" TypeName="finalprojectModel.WORKER_SKILLTAB_JUNCTION" StoreEntitySet="WORKER_SKILLTAB_JUNCTION">
+            <EndProperty Name="WORKER">
+              <ScalarProperty Name="WorkerID" ColumnName="WorkerID" />
+            </EndProperty>
+            <EndProperty Name="SKILLTAB">
+              <ScalarProperty Name="SkillTabID" ColumnName="SkillTabID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="WorkExperience" TypeName="finalprojectModel.WorkExperience" StoreEntitySet="WorkExperience">
+            <EndProperty Name="WORKER">
+              <ScalarProperty Name="WorkerID" ColumnName="WorkerID" />
+            </EndProperty>
+            <EndProperty Name="EVENT">
+              <ScalarProperty Name="EventID" ColumnName="EventID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="REQUIREDSKILLTABs">
+            <EntityTypeMapping TypeName="finalprojectModel.REQUIREDSKILLTAB">
+              <MappingFragment StoreEntitySet="REQUIREDSKILLTAB">
+                <ScalarProperty Name="RequiredSkillName" ColumnName="RequiredSkillName" />
+                <ScalarProperty Name="RequiredSkillTabID" ColumnName="RequiredSkillTabID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="EVENT_REQUIREDSKILLTAB_JUNCTION" TypeName="finalprojectModel.EVENT_REQUIREDSKILLTAB_JUNCTION" StoreEntitySet="EVENT_REQUIREDSKILLTAB_JUNCTION">
+            <EndProperty Name="REQUIREDSKILLTAB">
+              <ScalarProperty Name="RequiredSkillTabID" ColumnName="RequiredSkillTabID" />
+            </EndProperty>
+            <EndProperty Name="EVENT">
+              <ScalarProperty Name="EventID" ColumnName="EventID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="WORKER_REQUIREDSKILLTAB_JUNCTION" TypeName="finalprojectModel.WORKER_REQUIREDSKILLTAB_JUNCTION" StoreEntitySet="WORKER_REQUIREDSKILLTAB_JUNCTION">
+            <EndProperty Name="WORKER">
+              <ScalarProperty Name="WorkerID" ColumnName="WorkerID" />
+            </EndProperty>
+            <EndProperty Name="REQUIREDSKILLTAB">
+              <ScalarProperty Name="RequiredSkillTabID" ColumnName="RequiredSkillTabID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

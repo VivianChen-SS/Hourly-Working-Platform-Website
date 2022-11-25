@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ce031172b70c4915aa582675964f8708" Name="Diagram1" ZoomLevel="90">
+        <EntityTypeShape EntityType="finalprojectModel.AspNetRole" Width="1.5" PointX="0.75" PointY="6.875" />
+        <EntityTypeShape EntityType="finalprojectModel.AspNetUserClaim" Width="1.5" PointX="3" PointY="21.375" />
+        <EntityTypeShape EntityType="finalprojectModel.AspNetUserLogin" Width="1.5" PointX="3" PointY="12" />
+        <EntityTypeShape EntityType="finalprojectModel.AspNetUserRole" Width="1.5" PointX="3" PointY="8.75" />
+        <EntityTypeShape EntityType="finalprojectModel.AspNetUser" Width="1.5" PointX="0.75" PointY="9.625" />
+        <EntityTypeShape EntityType="finalprojectModel.COMPANY" Width="1.5" PointX="3.75" PointY="5.375" />
+        <EntityTypeShape EntityType="finalprojectModel.COMPANYFEATURETAB" Width="1.5" PointX="6" PointY="5.875" />
+        <EntityTypeShape EntityType="finalprojectModel.EMPLOYER" Width="1.5" PointX="6" PointY="10" />
+        <EntityTypeShape EntityType="finalprojectModel.EVENT" Width="1.5" PointX="8.25" PointY="8.625" />
+        <EntityTypeShape EntityType="finalprojectModel.EVENT_WORKER_JUNCTION" Width="1.5" PointX="15" PointY="11.25" />
+        <EntityTypeShape EntityType="finalprojectModel.EVENTTAB" Width="1.5" PointX="10.5" PointY="9.5" />
+        <EntityTypeShape EntityType="finalprojectModel.SKILLTAB" Width="1.5" PointX="10.5" PointY="14.875" />
+        <EntityTypeShape EntityType="finalprojectModel.WORKER" Width="1.5" PointX="12.75" PointY="9.25" />
+        <AssociationConnector Association="finalprojectModel.FK_USERROLES_ROLES" />
+        <AssociationConnector Association="finalprojectModel.FK_USERCLAIMS_USERACCOUNT" />
+        <AssociationConnector Association="finalprojectModel.FK_USERLOGINS_USERACCOUNT" />
+        <AssociationConnector Association="finalprojectModel.FK_USERROLES_USERACCOUNT1" />
+        <AssociationConnector Association="finalprojectModel.FK_EMPLOYER_AspNetUsers" />
+        <AssociationConnector Association="finalprojectModel.FK_EMPLOYER_COMPANY" />
+        <AssociationConnector Association="finalprojectModel.FK_EVENT_EMPLOYER" />
+        <AssociationConnector Association="finalprojectModel.FK_EVENT_WORKER_JUNCTION_EVENT" />
+        <AssociationConnector Association="finalprojectModel.FK_EVENT_WORKER_JUNCTION_WORKER" />
+        <AssociationConnector Association="finalprojectModel.COMPANY_COMPANYFEATURETAB_JUNCTION" />
+        <AssociationConnector Association="finalprojectModel.EVENT_EVENTTAB_JUNCTION" />
+        <AssociationConnector Association="finalprojectModel.EVENT_SKILLTAB_JUNCTION" />
+        <AssociationConnector Association="finalprojectModel.WORKER_EVENTTAB_JUNCTION" />
+        <AssociationConnector Association="finalprojectModel.WORKER_SKILLTAB_JUNCTION" />
+        <AssociationConnector Association="finalprojectModel.WorkExperience" />
+        <EntityTypeShape EntityType="finalprojectModel.REQUIREDSKILLTAB" Width="1.5" PointX="10.5" PointY="12" />
+        <AssociationConnector Association="finalprojectModel.EVENT_REQUIREDSKILLTAB_JUNCTION" />
+        <AssociationConnector Association="finalprojectModel.WORKER_REQUIREDSKILLTAB_JUNCTION" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,318 @@
+﻿@model final_project.Models.EventChooseTabViewModel
+@{
+    ViewBag.Title = "ChooseTab";
+}
+
+<link href="~/Content/EVENT6.css" rel="stylesheet" />
+<style>
+
+    .submit {
+        width: 30%;
+        position: absolute;
+        top: 96%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .tags {
+        list-style: none;
+        margin: 0;
+        overflow: hidden;
+        padding: 0;
+        color: white;
+        margin-left: 30px;
+        font-weight: bold;
+    }
+
+        .tags li {
+            float: left;
+        }
+
+    .tag {
+        background-color: #ffbb99;
+        border-radius: 3px 0 0 3px;
+        display: inline-block;
+        height: 26px;
+        line-height: 26px;
+        padding: 0 20px 0 23px;
+        position: relative;
+        margin: 0 10px 10px 0;
+        text-decoration: none;
+        -webkit-transition: color 0.2s;
+    }
+
+        .tag::before {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+            content: '';
+            height: 6px;
+            left: 10px;
+            position: absolute;
+            width: 6px;
+            top: 10px;
+        }
+
+        .tag::after {
+            background: #7cab98;
+            border-bottom: 13px solid transparent;
+            border-left: 10px solid #ffbb99;
+            border-top: 13px solid transparent;
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+    .control-label {
+        color: white;
+        font-size: 20px;
+        font-weight: bolder;
+        float: left;
+        margin-left:10px
+    }
+</style>
+
+<h2>選擇標籤</h2>
+<span style="color:gray">
+    STEP 1) 輸入資料 >
+    <b style="color:black">
+        STEP 2) 選擇標籤 >
+    </b>
+    STEP 3) 選擇職業適配性格 >
+    STEP 4) 確認資料 >
+    STEP 5) 成功送出，等待回覆！
+</span>
+<hr />
+
+@using (Html.BeginForm())
+{
+
+    <div class="container">
+        <div class=" clearfix">
+            <div class="form-horizontal row">
+                <br />
+                <div class="col-md-6 " style="background-color:#7cab98">
+                    <!-- #region workTab(eventTab) region-->
+                    <br />
+                    <div class="form-group">
+                        <p class="control-label">工作屬性標籤：</p>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.WorkTabSearchString, new { @class = "form-control" })
+                            <input type="submit" name="workSearchButton" value=" Search " />
+                            @Html.ValidationMessageFor(model => model.WorkTabSearchString, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <table>
+                                <tr>
+                                    @if (ViewBag.SearchedWorkTabs != null)
+                                    {
+                                        <p><font color="white">請勾選適合的標籤，並按下確認： <input type="submit" name="workSelectButton" value="確認" class="btn btn-default submit_1" /></p>
+                                        int count = 0;
+                                        List<final_project.Models.AssignedTabData> workTabList = ViewBag.SearchedWorkTabs;
+                                        foreach (var workTab in workTabList)
+                                        {
+                                            if (count++ % 4 == 0)
+                                            {
+                                            @:</tr><tr>
+                                            }
+                                            @:<td>
+                                                <input type="checkbox"
+                                                       name="selectedWorks"
+                                                       value="@workTab.TabID"
+                                                       style="margin-left: 30px;color:white;font-weight:bold"
+                                                       @(Html.Raw(workTab.Assigned ? "checked=\"checked\"" : "")) />
+                                                <span style="color:white;font-weight:bold">@workTab.TabName</span>
+                                            @:</td>
+                                        }
+                                    }
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    @if (ViewBag.newWorkTab != null)
+                    {
+                        <div class="form-group">
+                            <div class="" style="background-color:#7cab98; display: inline-block; padding:10px">
+                                <p color:white> @ViewBag.newWorkTab 是否要新增此標籤? </p>
+                                <input type="submit" name="createWorkTabButton" value="新增" />
+                                <input type="submit" name="notCreateWorkTabButton" value="否" />
+                            </div>
+                        </div>
+                    }
+
+
+                    <ul class="tags">
+                        @if (ViewBag.chosenWorkTabs != null)
+                        {
+                            <p>您已選擇的標籤：</p>
+                            foreach (var workTabName in ViewBag.chosenWorkTabs)
+                            {
+                                <li><span class="tag">@workTabName</span></li>
+                            }
+                        }
+                    </ul>
+                    <!-- #endregion -->
+                </div>
+                <div class="col-md-6 " style="background-color:#7cab98">
+                    <br />
+                    <!-- #region SkillTab region-->
+                    <div class="form-group">
+                        <p class="control-label">加分技能標籤：</p>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.SkillTabSearchString, new { @class = "form-control" })
+                            <input type="submit" name="skillSearchButton" value=" Search " />
+                            @Html.ValidationMessageFor(model => model.SkillTabSearchString, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2"></label>
+                        <div class="col-md-10">
+                            <table>
+                                <tr>
+                                    @if (ViewBag.SearchedSkillTabs != null)
+                                    {
+                                        <p><font color="white">請勾選適合的標籤，並按下確認： <input type="submit" name="skillSelectButton" value="確認" class="btn btn-default submit_1" /></p>
+                                        int count = 0;
+                                        List<final_project.Models.AssignedTabData> skillTabList = ViewBag.SearchedSkillTabs;
+                                        foreach (var skillTab in skillTabList)
+                                        {
+                                            if (count++ % 3 == 0)
+                                            {
+                                            @:</tr><tr>
+                                            }
+                                            @:<td>
+                                                <input type="checkbox"
+                                                       name="selectedSkills"
+                                                       value="@skillTab.TabID"
+                                                       style="margin-left:30px;"
+                                                       @(Html.Raw(skillTab.Assigned ? "checked=\"checked\"" : "")) />
+                                                <span style="color:white;font-weight:bold">@skillTab.TabName</span>
+                                            @:</td>
+                                        }
+                                    }
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+
+                    @if (ViewBag.newSkillTab != null)
+                    {
+                        <div class="form-group">
+                            <label class="control-label col-md-2"></label>
+                            <div class="" style="background-color:#7cab98; display: inline-block; padding:8px ; color:black;">
+                                <p style="color:white"> @ViewBag.newSkillTab 是否新增此標籤?</p>
+                                <input type="submit" name="createSkillTabButton" value="是，新增標籤" />
+                                <input type="submit" name="notCreateSkillTabButton" value="否" />
+                            </div>
+                        </div>
+
+                    }
+
+                    <ul class="tags">
+                        @if (ViewBag.chosenSkillTabs != null)
+                        {
+                            <p>您已選擇的標籤：</p>
+                            foreach (var skillTabName in ViewBag.chosenSkillTabs)
+                            {
+                                <li><span class="tag">@skillTabName</span></li>
+                            }
+                        }
+                    </ul>
+                    <!-- #endregion -->
+                </div>
+            </div>
+
+
+
+            <div class="row clearfix">
+                <div class="col-md-12 tab_down">
+
+                    <br>
+                    <div><h4><b><font color="white">&emsp;請選擇必要標籤</font></b></h4></div><hr />
+
+                    <div class="form-group" style="position: relative;padding-bottom:50px">
+                        <div>
+                            <table>
+                                <tr>
+                                    @if (ViewBag.RequiredSkills != null)
+                                    {
+                                        Dictionary<string, List<final_project.Models.AssignedTabData>> sortedRequiredSkills = new Dictionary<string, List<final_project.Models.AssignedTabData>>
+                                                                                            {
+                                                                                                { "駕照與運輸", new List<final_project.Models.AssignedTabData>() },
+                                                                                                { "個人特質", new List<final_project.Models.AssignedTabData>() },
+                                                                                                { "外語能力", new List<final_project.Models.AssignedTabData>() },
+                                                                                                { "資訊能力", new List<final_project.Models.AssignedTabData>() }
+
+                                                                                            };
+                                        List<final_project.Models.AssignedTabData> requiredSkillTabList = ViewBag.RequiredSkills;
+                                        foreach (var requiredSkillTab in requiredSkillTabList)
+                                        {
+                                            if (requiredSkillTab.TabID.StartsWith("000"))
+                                            {
+                                                sortedRequiredSkills["駕照與運輸"].Add(requiredSkillTab);
+                                            }
+                                            if (requiredSkillTab.TabID.StartsWith("002"))
+                                            {
+                                                sortedRequiredSkills["個人特質"].Add(requiredSkillTab);
+                                            }
+                                            if (requiredSkillTab.TabID.StartsWith("003") || requiredSkillTab.TabID.StartsWith("001"))
+                                            {
+                                                sortedRequiredSkills["外語能力"].Add(requiredSkillTab);
+                                            }
+                                            if (requiredSkillTab.TabID.StartsWith("004"))
+                                            {
+                                                sortedRequiredSkills["資訊能力"].Add(requiredSkillTab);
+                                            }
+                                        }
+
+                                        int count = 0;
+                                        foreach (KeyValuePair<string, List<final_project.Models.AssignedTabData>> skillList in sortedRequiredSkills)
+                                        {
+                                        @:</tr>
+                                        @:<td>@skillList.Key</td><tr>
+                                            count = 0;
+                                            foreach (final_project.Models.AssignedTabData skill in skillList.Value)
+                                            {
+                                                if (count++ % 3 == 0)
+                                                {
+                                                @:</tr><tr>
+                                                }
+                                                @:<td>
+                                                    <input type="checkbox"
+                                                           name="selectedRequiredSkills"
+                                                           value="@skill.TabID"
+                                                           style="margin-left: 30px;color:white"
+                                                           @(Html.Raw(skill.Assigned ? "checked=\"checked\"" : "")) />
+                                                    @skill.TabName
+                                                @:</td>
+                                            }
+                                        }
+                                    }
+                                </tr>
+                            </table>
+                        </div>
+                        <input type="submit" name="formSubmitButton" value="下一步" class="submit" />
+                        <br />
+                    </div>
+                </div>
+
+
+                @*<div class="col-md-12">
+                        <input type="submit" name="formSubmitButton" value="下一步" class="btn btn-default btn-block submit_2" />
+                    </div>*@
+
+
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "EventPanel";
+}
+
+<link href="~/Content/EventPanel.css" rel="stylesheet" />
+<div style="  display: grid;place-items: center;padding: calc(var(--space) * 2);">
+    <h2 style="margin-top:15%">
+        工作名稱： @ViewBag.Name</>
+
+
+        <h3>總需 @ViewBag.NumberOfWorkers 人，已錄取 @( ViewBag.NumberOfWorkers - ViewBag.LackofWorkers ) 人，尚缺 @ViewBag.LackofWorkers  人</h3>
+
+
+        <div class="multi-button">
+            <button class="sketchy" onclick="location.href = '@Url.Action("Details",new { id = ViewBag.Id })';">詳細內容</button>
+            @if (ViewBag.NoApplier)
+            {
+                <button class="sketchy">還沒有收到履歷呦~~</button>
+            }
+            else
+            {
+                <button class="sketchy" onclick="location.href = '@Url.Action("ResumeList",new { id = ViewBag.Id })';">查看履歷</button>
+            }
+            <button class="sketchy" onclick="location.href = '@Url.Action("Index")';">回前頁</button>
+        </div>
+
+
+</div>
+

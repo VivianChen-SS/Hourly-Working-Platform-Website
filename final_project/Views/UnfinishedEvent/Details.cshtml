@@ -1,0 +1,301 @@
+﻿@model final_project.Models.EVENT
+
+@{
+    ViewBag.Title = "Details";
+}
+<link href="~/Content/EVENT6.css" rel="stylesheet" />
+<style>
+    p .event_inside_6 {
+        font-size: 50px;
+    }
+
+
+    .retroshadow {
+        /*font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+        color: #2c2c2c;
+        letter-spacing: .05em;
+        text-shadow: 4px 4px 0px #d5d5d5;*/
+        font-family: "Comic Sans MS","微軟正黑體", cursive, sans-serif;
+        margin: 11px 0 17px 0;
+        color: black;
+        text-shadow: 0 13.36px 8.896px #c4b59d,0 -2px 1px #fff;
+        letter-spacing: -4px;
+    }
+
+    .title_wrap {
+        position: relative;
+        margin: 10px;
+        font-size: 45px;
+    }
+</style>
+
+<span class="title_wrap retroshadow">詳細內容</span>
+
+<div class="form-horizontal row" style="margin-top:30px">
+    <div class="col-md-4 information_2">
+        <br><br>
+        <div class="form-group">
+            <h4><b><font color="#7cab98">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   工作名稱</font></b></h4>
+            <div class="col-md-10 event_inside_6">
+                @Html.DisplayFor(model => model.Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <h4><b><font color="#7cab98">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   日期</font></b></h4>
+            <div class="col-md-10 event_inside_6">
+                @Html.DisplayFor(model => model.Date)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <h4><b><font color="#7cab98">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   時間</font></b></h4>
+            <div class="col-md-10 event_inside_6">
+                <span>
+                    @Html.DisplayFor(model => model.Time_Start)
+                    @if (Model.Time_End != null)
+                    {
+                        @:~
+                        @Html.DisplayFor(model => model.Time_End)
+                    }
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <h4><b><font color="#7cab98">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   電話</font></b></h4>
+            <div class="col-md-10 event_inside_6">
+                @Html.DisplayFor(model => model.Tel)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <h4><b><font color="#7cab98">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   需求人數</font></b></h4>
+            <div class="col-md-10 event_inside_6">
+                @Html.DisplayFor(model => model.NumberOfWorkers)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <h4><b><font color="#7cab98">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   工作地址</font></b></h4>
+            <div class="col-md-10 event_inside_6">
+                <dd>
+                    @Html.DisplayFor(model => model.Address)
+                    @* 為了專題報告應急用，把遠距工作的地圖踢掉，以後要找一個好一點的寫法改一下 *@
+                    @if (!Model.Address.Contains("遠距") && !Model.Address.Contains("線上"))
+                    {
+                        string url = "https://www.google.com/maps/embed/v1/place?q="
+                            + Model.Address + "&key=AIzaSyA-BLW-5csaWqjE4P0yLZdieY7DJ_0p19A";
+                        <br />
+                        <iframe frameborder="0" style="height:250px;"
+                                src=@url></iframe>
+                    }
+                </dd>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    <div class="col-md-4 wage_2">
+        <br>
+        <div class="form-group">
+            <br>
+            <h4><b><font color="#7cab98">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   履歷上限</font></b></h4>
+            <div class="col-md-10 event_inside_6">
+                <div style=" display: table">
+                    <dd>
+                        @if (Model.maxResumeNumber != null)
+                        {
+                            @Html.DisplayFor(model => model.maxResumeNumber)
+                        }
+                        else
+                        {
+                            @: 沒有上限喔~~
+                        }
+                    </dd>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <h4><b><font color="#7cab98">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   已錄取</font></b></h4>
+            <div class="col-md-10 event_inside_6">
+                <dd>
+                    @if (ViewBag.workerNameList.Count != 0)
+                    {
+                        foreach (string name in ViewBag.workerNameList)
+                        {
+                            <span>@name</span>
+                        }
+                    }
+                  
+                </dd>
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <h4><b><font color="#7cab98">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   薪資給付</font></b></h4>
+            <div class="col-md-10 event_inside_6">
+                @if (Model.Wage_byHour != null)
+                {
+
+                    <dd>
+                        <span>@Model.Wage_byHour NT$/小時</span>
+                    </dd>
+                }
+                else
+                {
+                    <dd>
+                        @Html.DisplayFor(model => model.Wage_byOthers)
+                    </dd>
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            <h4><b><font color="#7cab98">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   下架時間</font></b></h4>
+            <div class="col-md-10 event_inside_6">
+                <dd>
+                    @Model.OffListTime.ToLongDateString()  @Model.OffListTime.ToLongTimeString()
+                </dd>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <h4><b><font color="#7cab98">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   工作屬性標籤</font></b></h4>
+            <div class="col-md-10 event_inside_6">
+                <ul class="tags">
+                    @if (Model.EVENTTABs != null)
+                    {
+                        foreach (var workTab in Model.EVENTTABs)
+                        {
+                            <li class="tag">@workTab.EventName</li>
+                        }
+                    }
+                    else
+                    {
+                        <span style="color:black">沒有標籤喔~~ </span>
+                    }
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <h4><b><font color="#7cab98">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   需求技能標籤</font></b></h4>
+            <div class="col-md-10 event_inside_6">
+                <ul class="tags">
+                    @if (Model.SKILLTABs != null)
+                    {
+                        foreach (var skillTab in Model.SKILLTABs)
+                        {
+                            <li class="tag">@skillTab.SkillName</li>
+                        }
+                    }
+                    else
+                    {
+                        <span style="color:black">沒有標籤喔~~ </span>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="form-group">
+            <h4><b><font color="#7cab98">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   必要技能標籤</font></b></h4>
+            <div class="col-md-10 event_inside_6">
+                <ul class="tags">
+                    @if (Model.SKILLTABs != null)
+                    {
+                        foreach (var reqskillTab in Model.REQUIREDSKILLTABs)
+                        {
+                            <li class="tag">@reqskillTab.RequiredSkillName</li>
+                        }
+                    }
+                    else
+                    {
+                        <span style="color:black">沒有標籤喔~~ </span>
+                    }
+                </ul>
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <h4><b><font color="#7cab98">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   MBTI適配職能</font></b></h4>
+            <div class="col-md-10 event_inside_6">
+                <ul class="tags">
+                    @if (Model.I)
+                    {<li class="tag">內向型 </li>}
+                    @if (Model.E)
+                    {<li class="tag">外向型 </li>}
+                    @if (Model.N)
+                    {<li class="tag">直覺型 </li>}
+                    @if (Model.S)
+                    {<li class="tag">實感型(辨識型) </li>}
+                    @if (Model.T)
+                    {<li class="tag">思考型(理性) </li>}
+                    @if (Model.F)
+                    {<li class="tag">情感型(感性) </li>}
+                    @if (Model.P)
+                    {<li class="tag">感知型(熟思型) </li>}
+                    @if (Model.J)
+                    {<li class="tag">判斷型(果斷型) </li>}
+                </ul>
+            </div>
+        </div>
+        <div class="form-group">
+            <h4><b><font color="#7cab98">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   必要職能</font></b></h4>
+            <div class="col-md-10 event_inside_6">
+                @{ 
+                    switch (Model.RequiredCharacter)
+                    {
+                        case "I": <span>內向型</span> break;
+                        case "E": <span>外向型</span> break;
+                        case "N": <span>直覺型</span> break;
+                        case "S": <span>實感型(辨識型)</span> break;
+                        case "T": <span>思考型(理性)</span> break;
+                        case "F": <span>情感型(感性)</span> break;
+                        case "P": <span>感知型(熟思型)</span> break;
+                        case "J": <span>判斷型(果斷型)</span> break;
+                        default: <span>任何類型的都歡迎喔~~</span> break;
+                    }
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            <h4><b><font color="#7cab98">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   工作內容</font></b></h4>
+            <div class="col-md-10 event_inside_6">
+                <dd>
+                    @if (Model.Abouts != null)
+                        {
+                        <div style="background-color:antiquewhite; padding:10px; display: inline-block;">@Html.Raw(Model.Abouts)</div>
+                    }
+                    else
+                    {
+                        @: 沒有說明喔~~
+                    }
+                </dd>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

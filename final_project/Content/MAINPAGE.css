@@ -1,0 +1,82 @@
+﻿body {
+    background-color: #f3f3f3;
+    font-family: "微軟正黑體", "Microsoft JhengHei", "Segoe UI Semibold", "Segoe UI", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+}
+
+.navbar-default {
+    background-color: #f3f3f3;
+    font-family: 'Microsoft JhengHei UI';
+    font-size: 14px;
+    color: #3a3a3a;
+}
+
+
+
+<style >
+html {
+    height: 100%;
+}
+
+body {
+    background-image: url(../Pictures/bg1.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+
+</style >
+
+.services {
+    display: block;
+    width: 33%;
+    height: 200px;
+    position: relative;
+    padding-left: 100px;
+}
+
+.services .services-wrap1 {
+    width: 300px;
+    height: 150px;
+    background: #ffbd2e;
+    border-radius: 5px;
+}
+
+.services .services-wrap2 {
+    width: 300px;
+    height: 150px;
+    background: #ed6e3b;
+    border-radius: 5px;
+}
+
+.services .services-wrap3 {
+    width: 300px;
+    height: 150px;
+    background: #7cab98;
+    border-radius: 5px;
+}
+
+
+
+.services .media-body h3 {
+    font-weight: 300;
+    font-size: 18px;
+    color: #000000;
+}
+
+
+.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+    .no-gutters > .col,
+    .no-gutters > [class*="col-"] {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+.container {
+    padding-left: 300;
+    padding-right: 300;
+}

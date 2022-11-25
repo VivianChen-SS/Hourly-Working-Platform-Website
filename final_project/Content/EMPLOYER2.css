@@ -1,0 +1,48 @@
+﻿body {
+    background-color: #f3f3f3;
+    font-family: "微軟正黑體", "Microsoft JhengHei", "Segoe UI Semibold", "Segoe UI", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+}
+
+
+.FirstPart1 {
+    display: table;
+    max-width: 950px;
+    height: 410px;
+    padding: 30px;
+    margin-right: auto;
+    margin-left: 250px;
+    background: #fed7c6;
+    vertical-align: middle;
+    float: none;
+    border-radius: 5px;
+}
+
+
+.FirstPart2 {
+    display: table;
+    max-width: 950px;
+    height: 410px;
+    padding: 30px;
+    margin-right: auto;
+    margin-left: 265px;
+    background: #fed7c6;
+    vertical-align: middle;
+    float: none;
+    border-radius: 5px;
+}
+
+.up_1 {
+    height: 50px;
+}
+
+.up_2 {
+    margin-right: auto;
+    margin-left: 220px;
+    color: #7cab98;
+}
+
+.up_3 {
+    margin-right: auto;
+    margin-left: 235px;
+    color: #7cab98;
+}

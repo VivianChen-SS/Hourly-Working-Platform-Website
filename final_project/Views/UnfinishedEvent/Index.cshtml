@@ -1,0 +1,197 @@
+﻿@model PagedList.IPagedList<final_project.Models.UnfinishedEventsIndexViewModels>
+@using PagedList.Mvc
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+<link href="~/Content/List3.css" rel="stylesheet" />
+<style>
+</style>
+@*<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">*@
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>未完結工作事項</h2>
+<div class=row style="margin-bottom:10px">
+
+    <div class="dropdown list_2">
+        <button class="dropbtn">排序(升冪/降冪)</button>
+        <div class="dropdown-content">
+            @Html.ActionLink("工作倒數", "Index", new { sortOrder = ViewBag.WorkDateSortParm, currentFilter = ViewBag.CurrentFilter, onePage = ViewBag.onePage ? false : true }, new { @class = "sorting_a" })
+
+            @Html.ActionLink("徵人倒數", "Index", new { sortOrder = ViewBag.OffListDateSortParm, currentFilter = ViewBag.CurrentFilter, onePage = ViewBag.onePage ? false : true }, new { @class = "sorting_a" })
+
+            @Html.ActionLink("熱度", "Index", new { sortOrder = ViewBag.heatSortParm, currentFilter = ViewBag.CurrentFilter, onePage = ViewBag.onePage ? false : true }, new { @class = "sorting_a" })
+
+        </div>
+    </div>
+
+
+
+    @using (Html.BeginForm("Index", "UnfinishedEvent", FormMethod.Get))
+    {
+        //以下此段css來自：https://codepen.io/huange/pen/rbqsD
+        <div class="wrap">
+            <div class="search">
+                @Html.TextBox("SearchString", null, new { @Value = ViewBag.CurrentFilter, @class = "searchTerm", placeholder = "名稱、工作標籤" })
+                <button type="submit" class="searchButton" value="Search">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+            @*暫時不做清空搜尋的功能，因為排版會很難看，而且input背用掉了，直接這樣寫繪出不來
+                <input type="submit" name="clearSearchButton" value="清空搜尋" />*@
+        </div>
+
+        @*<div class="dot_wrap">
+            <a class="filter_buttonlink" href="@Url.Action("Index", "UnfinishedEvent", new {  currentFilter = "尚未招滿" })">
+                未招滿
+            </a>
+            <a class="filter_buttonlink" href="@Url.Action("Index", "UnfinishedEvent", new { currentFilter = "已招滿" })">
+                已招滿
+            </a>
+            <a class="filter_buttonlink" href="@Url.Action("Index", "UnfinishedEvent", new { currentFilter = "全部" })">
+                全部
+            </a>
+        </div>*@
+
+
+        @:顏色越深、辣椒越多的工作，越緊急喔！
+        @*單頁瀏覽佳if判斷的原因：當沒有資料的時候，把pagesize = 0傳回controller，會有error。因為ToPagedList不吃為0的pagesize。*@
+        if (Model.Count() != 0)
+        {
+            <a class="single_page" href="@Url.Action("Index", "UnfinishedEvent", new {sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, onePage = ViewBag.onePage })">
+                @(ViewBag.onePage ? "單頁瀏覽" : "多頁瀏覽")
+            </a>
+           
+        }
+    }
+
+</div>
+
+
+@if (ViewBag.selectedNothing != null)
+{
+    <p style="text-size-adjust:150%; color:red;">拍謝！沒有你要搜尋的東西喔~~</p>
+}
+
+
+
+
+
+@*@Html.ActionLink("Date", "Index", new { sortOrder = ViewBag.WorkDateSortParm, currentFilter = ViewBag.CurrentFilter, onePage = ViewBag.onePage ? false : true })
+
+@Html.ActionLink("下架剩餘天數", "Index", new { sortOrder = ViewBag.OffListDateSortParm, currentFilter = ViewBag.CurrentFilter, onePage = ViewBag.onePage ? false : true })
+
+@Html.ActionLink("招人熱度 (顏色越深越緊急)", "Index", new { sortOrder = ViewBag.heatSortParm, currentFilter = ViewBag.CurrentFilter, onePage = ViewBag.onePage ? false : true })*@
+
+@*如果要檢查數值錯誤，把以下取消註解*@
+@*<th>
+        heat / zscoreRound / 下架小時除以6 / 還差幾人
+    </th>*@
+
+<div class="row" style="margin:5px">
+
+    @{ int count = 0;}
+    @foreach (var item in Model)
+    {
+        string heatColorStr = "";
+        if (item.HeatColorPercentage == 100)
+        {
+            heatColorStr = "hsl(0, 0%, 92%)";
+        }
+        else
+        {
+            heatColorStr = "hsl(36, 100%," + item.HeatColorPercentage + "%)";
+        }
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <a href="@Url.Action("eventPanel", "UnfinishedEvent",  new { id = item.EventID })" style="display:block;color:black;">
+                <div class="selected_work">
+
+                    <div style="background-color: @(heatColorStr);width:100%; float:top;height:25px;position: absolute;left:0,top:0">
+                        @for (int i = 0; i < (100 - item.HeatColorPercentage) / 15; i++)
+                        {
+                            <img src="~/Pictures/chili-pepper.png" style="width:15px; height:15px; margin:5px;" />
+                        }
+                    </div>
+                    <div style="padding-top:8%;width:100%;padding:10%;">
+                        <div class="work_name">
+                            <div class=" animated-underline animated-underline_type4 news__link"
+                                 style="  display: inline;
+                                --uiAnimatedUnderlineWidth: var(--animatedUnderlineWidth, 100%);
+                                --uiAnimatedUnderlineHeight: var(--animatedUnderlineHeight, 2px);
+                                --uiAnimatedUnderlineBgColor: var(--animatedUnderlineBgColor,   @(heatColorStr) );
+                                --uiAnimatedUnderlinePositionX: var(--animatedUnderlinePositionX, left);
+                                --uiAnimatedUnderlinePositionY: var(--animatedUnderlinePositionY, bottom);">
+                                @item.Name
+                            </div>
+                        </div>
+                        <div class="time">
+                            <img src="~/Pictures/date.png" class="date_pic" />
+                            @item.Date.ToShortDateString() <br />
+                            &emsp; &emsp; &emsp;@Html.DisplayFor(m => item.Time_Start)
+                            &ensp; ~  &ensp;
+                            @Html.DisplayFor(m => item.Time_End)
+                        </div>
+                        <hr />
+
+                        @*@Html.ActionLink(item.Name, "eventPanel", new { id = item.EventID, name = item.Name, numOfWorkers = item.NumberOfWorkers, numOfHired = item.NumberOfHired })*@
+
+                        @*@item.Date.ToLongDateString()
+
+                            @Html.DisplayFor(modelItem => item.Time_Start) ~ @Html.DisplayFor(modelItem => item.Time_End)*@
+
+                        @*@( (int)(item.OffListHoursLeft / 24) ) 天 @( (int)(item.OffListHoursLeft % 24) ) 小時
+
+                            @( (int)(item.WorkDayHoursLeft / 24) ) 天 @( (int)(item.WorkDayHoursLeft % 24) ) 小時*@
+
+                        <div>
+                            <img src="~/Pictures/time_left.png" style="width:35px; height:25px; display: inline-block; float:left; margin-top:6px " />
+                            <div style=" display: inline-block;">
+                                徵人倒數：@( (int)(item.OffListHoursLeft / 24) )天 @( (int)(item.OffListHoursLeft % 24) )小時<br />
+                                工作倒數：@( (int)(item.WorkDayHoursLeft / 24) )天 @( (int)(item.WorkDayHoursLeft % 24) )小時
+                            </div>
+                        </div>
+
+                        <hr>
+                        <div>
+                            <img src="~/Pictures/blue_person.jpg" class="person_pic" />
+                            <div style=" display: inline-block; margin-left:15px">
+                                需求： @item.NumberOfWorkers 人 <br />
+                                已錄用 <b>@item.NumberOfHired </b>人，尚缺 <b>@item.StillNeed</b> 人
+                            </div>
+                        </div>
+
+
+                        @*<td style="background-color:hsl(36, 100%,@(item.HeatColorPercentage + "%") )">
+                                <span> </span>
+                            </td>*@
+
+                        @*如果要檢查數值錯誤，把以下取消註解*@
+                        @*<td>
+                                @aaa & @ViewBag.heatArray[count] & @ViewBag.zScoreRoundArray[count] & @ViewBag.remainingHoursArray[count] & @ViewBag.lackArray[count]
+                            </td>*@
+                    </div>
+                </div>
+            </a>
+        </div>
+        count++;
+    }
+</div>
+
+
+
+
+
+
+@if (ViewBag.onePage)
+{
+    <br />
+    @:第 @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber ) 頁，總共 @Model.PageCount 頁
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }),
+    new PagedListRenderOptions
+    {
+        LinkToFirstPageFormat = "<< 第一頁",
+        LinkToPreviousPageFormat = "< 前一頁",
+        LinkToNextPageFormat = "後一頁 >",
+        LinkToLastPageFormat = "最末頁 >>"
+    })
+}

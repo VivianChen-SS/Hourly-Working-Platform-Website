@@ -1,0 +1,179 @@
+﻿@model final_project.Models.EMPLOYER
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<link href="~/Content/EMPLOYER2.css" rel="stylesheet" />
+
+<div>
+    <hr />
+
+
+    <div class=" container">
+        <div class=" col-md-2 ">
+        </div>
+        <div class="col-md-10 up_2">
+            <h3><strong>基本資料</strong></h3>
+        </div>
+        <div class="row">
+            <div style="position:absolute;">
+                    <img src="~/Employer/RetrieveImage?id=@Model.EmployerID" alt="" height=125 width=125 style="border-radius:50%"/>
+                    <div>
+                        @Html.ActionLink("編輯資料", "Edit", new { id = Model.EmployerID }, new { @class = "underlined underlined--gradient" }) <br />
+                        @Html.ActionLink("編輯頭貼", "UploadPicture", new { id = Model.EmployerID }, new { @class = "underlined underlined--gradient" })<br />
+                        @if (Model.COMPANY == null)
+                        {
+                            @Html.ActionLink("編輯公司資料", "CreateCompany", new { id = Model.EmployerID }, new { @class = "underlined underlined--gradient" })<br />
+                        }
+                        @Html.ActionLink("所有工作", "AllWorksIndex", null, new { @class = "underlined underlined--gradient" })<br />
+                    </div>
+
+                   
+            </div>
+
+
+           
+
+           
+
+
+
+
+            <div class="col-md-10 FirstPart1">
+                <br><br>
+                <dl class="dl-horizontal">
+                    <div style="border:1px blue soild;padding:12px;">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Name)
+                        </dd>
+                    </div>
+                    <div style="border:1px blue soild;padding:12px;">
+                        <dt>
+                            Age
+                        </dt>
+
+                        <dd>
+                            @(DateTime.Today.Year - @Model.Birthday.Year)
+                        </dd>
+                    </div>
+                    <div style="border:1px blue soild;padding:12px;">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Gender)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Gender)
+                        </dd>
+                    </div>
+                    <div style="border:1px blue soild;padding:12px;">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Tel)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Tel)
+                        </dd>
+                    </div>
+                    <div style="border:1px blue soild;padding:12px;">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Birthday)
+                        </dt>
+
+                        <dd>
+                            @Model.Birthday.ToString("yyyy/M/d")
+                        </dd>
+                    </div>
+                    <div style="border:1px blue soild;padding:12px;">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.AspNetUser.Email)
+                        </dd>
+                    </div>
+                    <div style="border:1px blue soild;padding:12px;">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Acknowledge)
+                        </dt>
+
+                        <dd style="background-color:#ebebe0">
+                            @Html.Raw(Model.Acknowledge)
+                        </dd>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+@if (Model.COMPANY != null)
+{
+    <div class=" container">
+        <div class="col-md-10 up_3">
+            <h3><strong>公司資訊</strong></h3>
+        </div>
+        <div class="row">
+            <div class="col-md-12 FirstPart2">
+                <br><br>
+                <dl class="dl-horizontal">
+                    <div style="border:1px blue soild;padding:12px;">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.COMPANY.Name)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.COMPANY.Name)
+                        </dd>
+                    </div>
+
+                    <div style="border:1px blue soild;padding:12px;">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.COMPANY.Tel)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.COMPANY.Tel)
+                        </dd>
+                    </div>
+
+                    <div style="border:1px blue soild;padding:12px;">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.COMPANY.Address)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.COMPANY.Address)
+                        </dd>
+                    </div>
+
+                    <div style="border:1px blue soild;padding:12px;">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.COMPANY.Industry)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.COMPANY.Industry)
+                        </dd>
+                    </div>
+
+                    <div style="border:1px blue soild;padding:12px;">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.COMPANY.Intro)
+                        </dt>
+                        <dd style="background-color:#ebebe0;    max-width: 950px;">
+                            @Html.Raw(Model.COMPANY.Intro)
+                        </dd>
+                    </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+@section Scripts {
+    <script src="~/Scripts/ClearCompanyInfo.js"></script>
+}

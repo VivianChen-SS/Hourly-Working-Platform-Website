@@ -1,0 +1,15 @@
+﻿@model final_project.Models.EVENT
+
+@if (@ViewBag.finishable)
+{
+    using (Html.BeginForm())
+    {
+        <input type="hidden" name="workerId" value="@ViewBag.id" />
+        <input type="hidden" name="applierId" value="@ViewBag.finishable" />
+        <input type="submit" />
+    }
+}
+else
+{
+    @:不好意思，有還沒有案finish，你不能按
+}

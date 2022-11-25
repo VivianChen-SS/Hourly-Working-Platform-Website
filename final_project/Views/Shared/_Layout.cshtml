@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+
+
+<link href="~/Content/MAINPAGE.css" rel="stylesheet" />
+<link href="~/Content/creatework_btn.css" rel="stylesheet" />
+
+<body>
+    <div class="nav navbar-default navbar-fixed-top" style="background-color: #f3f3f3;">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("人力共享平台", "Index", "Home", new { area = "" }, new { @class = "navbar-brand header" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("首頁", "Index", "Home", null, new { @class = "header" })</li>
+                    <li>@Html.ActionLink("新增工作", "Create", "CreateEvent", null, new { @class = "header" })</li>
+                    <li>@Html.ActionLink("未完結工作事項", "Index", "UnfinishedEvent", null, new { @class = "header" })</li>
+                    <li>@Html.ActionLink("雇主專區", "Index", "Employer", null, new { @class = "header" })</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <div style="min-height:500px">
+            @RenderBody()
+        </div>
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - 專題N組</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

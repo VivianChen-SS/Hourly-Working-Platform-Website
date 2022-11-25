@@ -1,0 +1,142 @@
+﻿body {
+    background-color: #f3f3f3;
+    font-family: "微軟正黑體", "Microsoft JhengHei", "Segoe UI Semibold", "Segoe UI", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+}
+
+.loginblock {
+    display: inline-block;
+    width: 350px;
+    height: 410px;
+    margin-right: auto;
+    margin-left: auto;
+    background: #fed7c6;
+    vertical-align: middle;
+    float: none;
+    border-radius: 5px;
+}
+
+
+.forgotblock {
+    display: table;
+    width: 330px;
+    height: 200px;
+    margin-right: auto;
+    margin-left: auto;
+    background: #fed7c6;
+    vertical-align: middle;
+    float: none;
+    border-radius: 5px;
+}
+
+
+
+.up_1 {
+    height: 50px;
+}
+
+.email_block {
+    display: inline-block;
+    width: 500px;
+    height: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    vertical-align: middle;
+    float: none;
+}
+
+.passwprd_block {
+    display: inline-block;
+    width: 500px;
+    height: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    vertical-align: middle;
+    float: none;
+}
+
+.form-control {
+    display: inline-block;
+    width: 500px;
+    height: 30px;
+    margin-right: auto;
+    margin-left: 20px;
+    vertical-align: middle;
+    float: none;
+}
+
+
+.form-group {
+    color: #7cab98;
+    margin-left: 10px;
+}
+
+
+<style >
+label {
+    padding: 0;
+    margin-right: 3px;
+    cursor: pointer;
+}
+
+
+
+input[type=checkbox] {
+    display: inline-block;
+    background-color: #aaa;
+    padding: 3px 6px;
+    border: 1px solid gray;
+    color: #444;
+    user-select: none;
+}
+
+
+.color1 {
+    color: white;
+}
+
+a.my-class {
+    color: #7cab98
+}
+
+
+.form-group_1 {
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+    color: #7cab98
+}
+
+.form-control_1 {
+    display: table;
+    width: 1200px;
+    height: 30px;
+    margin-right: 10px;
+    vertical-align: middle;
+    float: none;
+}
+
+
+.error_block {
+    display: table;
+    width: 330px;
+    height: 300px;
+    margin-right: auto;
+    margin-left: auto;
+    background: #fed7c6;
+    vertical-align: middle;
+    float: none;
+    border-radius: 5px;
+}
+
+
+.reset_block {
+    display: table;
+    width: 330px;
+    height: 200px;
+    margin-right: auto;
+    margin-left: auto;
+    background: #fed7c6;
+    vertical-align: middle;
+    float: none;
+    border-radius: 5px;
+}

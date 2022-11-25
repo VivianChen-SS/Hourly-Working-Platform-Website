@@ -1,0 +1,280 @@
+﻿@model PagedList.IPagedList<final_project.Models.ResumeListViewModels>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+<link href="~/Content/ResumeList.css" rel="stylesheet" />
+
+<p class="title_wrap retroshadow">@ViewBag.WorkName</p>
+<h3 class="applierCount_wrap">總需 @ViewBag.NumberOfWorkers 人，已錄取 @( ViewBag.NumberOfWorkers - ViewBag.LackofWorkers ) 人，尚缺 <span style="color:lightcoral; font-weight:bolder; font-size:larger">@ViewBag.LackofWorkers</span>  人</h3>
+
+@using (Html.BeginForm("ResumeList", "UnfinishedEvent", FormMethod.Get))
+{
+    //以下此段css來自：https://codepen.io/huange/pen/rbqsD
+    <div class="search_wrap">
+        <div class="search">
+            @Html.TextBox("SearchString", null, new { @Value = ViewBag.CurrentFilter, @class = "searchTerm", @placeholder = "名字、學系、技能標籤" })
+            @*搜尋名字、學系、技能標籤：@Html.TextBox("SearchString", ViewBag.CurrentFilter as string)*@
+            @Html.TextBox("workId", null, new { @Value = ViewBag.ID, @class = "hidden" })
+            <button type="submit" class="searchButton" value="Search">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+        @*暫時不做清空搜尋的功能，因為排版會很難看，而且input背用掉了，直接這樣寫繪出不來
+            <input type="submit" name="clearSearchButton" value="清空搜尋" />*@
+    </div>
+
+}
+
+<div class="dot_wrap">
+    @if (ViewBag.selectedNothing != null)
+    {
+        <p style="text-size-adjust:150%; color:red;">拍謝！沒有你要搜尋的東西喔~~</p>
+    }
+</div>
+
+@if (Model.Count() != 0)
+{
+    <a class="single_page" href="@Url.Action("ResumeList", "UnfinishedEvent",new { workId = ViewBag.ID, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, onePage = ViewBag.onePage })">
+        @(ViewBag.onePage ? "單頁瀏覽" : "多頁瀏覽")
+    </a>
+}
+
+<div class="dropdown list_2">
+    <button class="dropbtn">排序(升冪/降冪)</button>
+    <div class="dropdown-content">
+        @Html.ActionLink("名字", "ResumeList", new { workId = ViewBag.ID, sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter, onePage = ViewBag.onePage ? false : true }, new { @class = "sorting_a" })
+
+        @Html.ActionLink("年齡", "ResumeList", new { workId = ViewBag.ID, sortOrder = ViewBag.AgeSortParm, currentFilter = ViewBag.CurrentFilter, onePage = ViewBag.onePage ? false : true }, new { @class = "sorting_a" })
+
+        @Html.ActionLink("適配度評分", "ResumeList", new { workId = ViewBag.ID, sortOrder = ViewBag.RatingSortParm, currentFilter = ViewBag.CurrentFilter, onePage = ViewBag.onePage ? false : true }, new { @class = "sorting_a" })
+
+
+        @if (ViewBag.onePage)  //if有paging的時候
+        {
+
+            @Html.ActionLink("是否錄用", "ResumeList", new { workId = ViewBag.ID, sortOrder = ViewBag.HiredSortParm, currentFilter = ViewBag.CurrentFilter, onePage = ViewBag.onePage ? false : true }, new { @class = "sorting_a" })
+            @*@Html.ActionLink("是否錄用", "ResumeList", new { id = ViewBag.ID, sortOrder = ViewBag.HiredSortParm, currentFilter = ViewBag.CurrentFilter })*@
+
+        }
+    </div>
+</div>
+
+
+
+<div class="row">
+
+    @if (!ViewBag.onePage)
+    {
+        <h3 style="background-color:white; padding:6px;padding-left:20px">未錄取</h3>
+    }
+    @foreach (var item in Model)
+    {
+        if (!ViewBag.onePage && item.Hire == false) //沒有paging的時候if生效
+        {
+            <div class="col-md-4 col-sm-6 col-xs-12" style="margin-top:5px; margin-bottom:5px">
+                <a href="@Url.Action("ApplierDetails", "UnfinishedEvent",  new {  id = item.WorkerID, workId = ViewBag.ID, hire = item.Hire, rating = item.Rating  })" style="display:block;color:black;">
+                    <div class="card" style="background-color: @(item.Hire? "#ffecb3" : "white");">
+                        <div>
+                            @*top half*@
+                            @{
+                                if (item.hasPhoto)
+                                {
+                                    <img src="~/UnfinishedEvent/RetrieveImage?id=@item.WorkerID" style="float:left; width:100px;height:100px; border-radius: 50%;margin-top:5%; margin-right:2%; margin-left:4px" />
+                                }
+                                else
+                                {
+                                    <img src="~/Pictures/nophoto.jpg" style="float:left; width:100px;height:100px; border-radius: 50%;margin-top:5%; margin-right:2%; margin-left:4px" />
+                                }
+                            }
+                            <div>
+                                @*@Html.ActionLink(item.Name, "ApplierDetails", new { id = item.WorkerID, workId = ViewBag.ID, hire = item.Hire, rating = item.Rating })*@
+                                <p class="heading heading--stroke-shadow">@item.Name</p>
+                                <div style="height:3px;display:block">
+                                    @{var rating = item.Rating < 0.0 ? 0 : item.Rating;}
+                                    @for (int i = 0; i < rating; i++)
+                                    {
+                                        <span class="fa fa-star" style="color: #ff0066"></span>
+                                    }
+
+                                </div>
+
+                                <div class="row" style="font-family:'Arial Black', Gadget, sans-serif;font-weight:bolder;margin-top:10px;font-size:20px; overflow: hidden; text-overflow: ellipsis;">
+                                    @item.Age 歲 <br />
+                                    @Html.DisplayFor(modelItem => item.School)&emsp;
+                                    @Html.DisplayFor(modelItem => item.GraduationStatus)
+
+                                </div>
+
+                                <ul class="tags">
+                                    @if (item.SkillTabs != null)
+                                    {
+                                        foreach (var skillTab in item.SkillTabs)
+                                        {
+                                            <li><span class="tag">@skillTab</span></li>
+                                        }
+                                    }
+                                </ul>
+
+                            </div>
+                            <div>
+                                @*bottom half*@
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        }
+        if (ViewBag.onePage) //有paging的時候if生效
+        {
+
+            <div class=" col-md-4 col-sm-6 col-xs-12" style="margin-top:5px; margin-bottom:5px">
+                <a href="@Url.Action("ApplierDetails", "UnfinishedEvent",  new {  id = item.WorkerID, workId = ViewBag.ID, hire = item.Hire, rating = item.Rating  })" style="display:block;color:black;">
+                    <div class="card" style="background-color: @(item.Hire? "#ffecb3" : "white");">
+                        <div>
+                            @*top half*@
+                            @{
+                                if (item.hasPhoto)
+                                {
+                                    <img src="~/UnfinishedEvent/RetrieveImage?id=@item.WorkerID" style="float:left; width:100px;height:100px; border-radius: 50%;margin-top:5%; margin-right:2%; margin-left:4px" />
+                                }
+                                else {
+                                    <img src="~/Pictures/nophoto.jpg" style="float:left; width:100px;height:100px; border-radius: 50%;margin-top:5%; margin-right:2%; margin-left:4px" />
+                                }
+                            }
+
+                            <div>
+                                @*@Html.ActionLink(item.Name, "ApplierDetails", new { id = item.WorkerID, workId = ViewBag.ID, hire = item.Hire, rating = item.Rating })*@
+                                <p class="heading heading--stroke-shadow">@item.Name</p>
+                                <div style="height:3px;display:block">
+                                    @{var rating = item.Rating < 0.0 ? 0 : item.Rating;}
+                                    @for (int i = 0; i < rating; i++)
+                                    {
+                                        <span class="fa fa-star" style="color: #ff0066"></span>
+                                    }
+
+                                </div>
+
+                                <div class="row" style="font-family:'Arial Black', Gadget, sans-serif;font-weight:bolder;margin-top:10px;font-size:20px; overflow: hidden; text-overflow: ellipsis;">
+                                    @item.Age 歲 <br />
+                                    @Html.DisplayFor(modelItem => item.School)&emsp;
+                                    @Html.DisplayFor(modelItem => item.GraduationStatus)
+
+                                </div>
+                                <ul class="tags">
+                                    @if (item.SkillTabs != null)
+                                    {
+                                        foreach (var skillTab in item.SkillTabs)
+                                        {
+                                            <li><span class="tag">@skillTab</span></li>
+                                        }
+                                    }
+                                </ul>
+
+                            </div>
+                            <div>
+                                @*bottom half*@
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        }
+    }
+</div>
+
+@if (!ViewBag.onePage)
+{
+    <h3 style="background-color:gold; padding:6px; padding-left:20px">已錄取</h3>
+    <table class="table">
+        @foreach (var item in Model)
+        {
+            if (item.Hire == true)
+            {
+                <div class="col-md-4 col-sm-6 col-xs-12" style="margin-top:5px; margin-bottom:5px">
+                    <a href="@Url.Action("ApplierDetails", "UnfinishedEvent",  new {  id = item.WorkerID, workId = ViewBag.ID, hire = item.Hire, rating = item.Rating  })" style="display:block;color:black;">
+                        <div class="card" style="background-color: @(item.Hire? "#ffecb3" : "white");">
+                            <div>
+                                @*top half*@
+                                @{
+                                    if (item.hasPhoto)
+                                    {
+                                        <img src="~/UnfinishedEvent/RetrieveImage?id=@item.WorkerID" style="float:left; width:100px;height:100px; border-radius: 50%;margin-top:5%; margin-right:2%; margin-left:4px" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Pictures/nophoto.jpg" style="float:left; width:100px;height:100px; border-radius: 50%;margin-top:5%; margin-right:2%; margin-left:4px" />
+                                    }
+                                }
+                                <div>
+                                    @*@Html.ActionLink(item.Name, "ApplierDetails", new { id = item.WorkerID, workId = ViewBag.ID, hire = item.Hire, rating = item.Rating })*@
+                                    <p class="heading heading--stroke-shadow">@item.Name</p>
+                                    <div style="height:3px;display:block">
+                                        @{var rating = item.Rating < 0.0 ? 0 : item.Rating;}
+                                        @for (int i = 0; i < rating; i++)
+                                        {
+                                            <span class="fa fa-star" style="color: #ff0066"></span>
+                                        }
+
+                                    </div>
+
+                                    <div class="row" style="font-family:'Arial Black', Gadget, sans-serif;font-weight:bolder;margin-top:10px;font-size:20px; overflow: hidden; text-overflow: ellipsis;">
+                                        @item.Age 歲 <br />
+                                        @Html.DisplayFor(modelItem => item.School)&emsp;
+                                        @Html.DisplayFor(modelItem => item.GraduationStatus)
+
+                                    </div>
+                                    <ul class="tags">
+                                        @if (item.SkillTabs != null)
+                                        {
+                                            foreach (var skillTab in item.SkillTabs)
+                                            {
+                                                <li><span class="tag">@skillTab</span></li>
+                                            }
+                                        }
+                                    </ul>
+
+                                </div>
+                                <div>
+                                    @*bottom half*@
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+            }
+        }
+    </table>
+
+}
+
+
+
+@if (ViewBag.onePage)
+{
+    <br />
+    @:第 @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 頁，總共 @Model.PageCount 頁
+
+    @Html.PagedListPager(Model, page => Url.Action("ResumeList",
+    new { page, workId = ViewBag.ID, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }),
+    new PagedListRenderOptions {
+        LinkToFirstPageFormat = "<< 第一頁",
+        LinkToPreviousPageFormat = "< 前一頁",
+        LinkToNextPageFormat = "後一頁 >",
+        LinkToLastPageFormat = "最末頁 >>"
+    })
+
+    @*以下這個也滿酷的，可是我懶得玩了，如果之後想加的話，再看看，寫在這裡以免忘記*@
+    @*@Html.PagedListGoToPageForm(Model,Url.Action("ResumeList",
+        new {sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@
+}

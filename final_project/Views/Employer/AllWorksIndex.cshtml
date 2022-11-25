@@ -1,0 +1,189 @@
+﻿
+@model PagedList.IPagedList<final_project.Models.AllEventsViewModels>
+@using PagedList.Mvc
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+<link href="~/Content/List3.css" rel="stylesheet" />
+
+<h2>所有工作表列</h2>
+
+<div class="dropdown">
+    <button class="dropbtn">篩選</button>
+    <div class="dropdown-content">
+        <a class="a" href="@Url.Action("AllWorksIndex", "Employer", new {  currentFilter = "徵人中" })">
+            徵人中
+        </a>
+        <a class="b" href="@Url.Action("AllWorksIndex", "Employer", new { currentFilter = "已下架，但工作尚未開始" })">
+            已下架，但工作尚未開始
+        </a>
+        <a class="c" href="@Url.Action("AllWorksIndex", "Employer", new { currentFilter = "工作中" })">
+            工作中
+        </a>
+        <a class="d" href="@Url.Action("AllWorksIndex", "Employer", new { currentFilter = "工作結束，未結清工資" })">
+            工作結束，未結清工資
+        </a>
+        <a class="e" href="@Url.Action("AllWorksIndex", "Employer", new { currentFilter = "已結清工資" })">
+            已結清工資
+        </a>
+        <a class="f" href="@Url.Action("AllWorksIndex", "Employer", new { currentFilter = "全部" })">
+            全部
+        </a>
+    </div>
+</div>
+
+<div class="dropdown list_2">
+    <button class="dropbtn">排序(升冪/降冪)</button>
+    <div class="dropdown-content">
+        @Html.ActionLink("日期", "AllWorksIndex", new { sortOrder = ViewBag.WorkDateSortParm, currentFilter = ViewBag.CurrentFilter, onePage = ViewBag.onePage ? false : true }, new { @class = "sorting_a" })
+
+        @Html.ActionLink("要求總人數", "AllWorksIndex", new { sortOrder = ViewBag.NumberOfWorkers, currentFilter = ViewBag.CurrentFilter, onePage = ViewBag.onePage ? false : true }, new { @class = "sorting_a" })
+
+        @Html.ActionLink("總預算", "AllWorksIndex", new { sortOrder = ViewBag.EstimatedCost, currentFilter = ViewBag.CurrentFilter, onePage = ViewBag.onePage ? false : true }, new { @class = "sorting_a" })
+
+        @Html.ActionLink("實際必須支付", "AllWorksIndex", new { sortOrder = ViewBag.ActualCost, currentFilter = ViewBag.CurrentFilter, onePage = ViewBag.onePage ? false : true }, new { @class = "sorting_a" })
+    </div>
+</div>
+
+<br />
+
+@using (Html.BeginForm("AllWorksIndex", "Employer", FormMethod.Get))
+{
+    //以下此段css來自：https://codepen.io/huange/pen/rbqsD
+    <div class="wrap">
+        <div class="search">
+            <input type="text" class="searchTerm" id="searchstring" name="searchstring" type="search" placeholder="名稱、工作標籤">
+            <button type="submit" class="searchButton" value="Search">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+        @*暫時不做清空搜尋的功能，因為排版會很難看，而且input背用掉了，直接這樣寫繪出不來
+            <input type="submit" name="clearSearchButton" value="清空搜尋" />*@
+    </div>
+
+}
+
+<div class="dot_wrap">
+    <div class="dot">
+        <a href="@Url.Action("AllWorksIndex", "Employer", new {  currentFilter = "徵人中" })" style="display:inline-block">
+            <img class="dot_img" src="~/Pictures/a.png" />
+        </a>
+    </div>
+    <div class="dot">
+        <a href="@Url.Action("AllWorksIndex", "Employer", new { currentFilter = "已下架，但工作尚未開始" })" style="display:inline-block">
+            <img class="dot_img" src="~/Pictures/b.png" />
+        </a>
+    </div>
+    <div class="dot">
+        <a href="@Url.Action("AllWorksIndex", "Employer", new { currentFilter = "工作中" })" style="display:inline-block">
+            <img class="dot_img" src="~/Pictures/c.png" />
+        </a>
+    </div>
+    <div class="dot">
+        <a href="@Url.Action("AllWorksIndex", "Employer", new { currentFilter = "工作結束，未結清工資" })" style="display:inline-block">
+            <img class="dot_img" src="~/Pictures/d.png" />
+        </a>
+    </div>
+    <div class="dot">
+        <a href="@Url.Action("AllWorksIndex", "Employer", new { currentFilter = "已結清工資" })" style="display:inline-block">
+            <img class="dot_img" src="~/Pictures/e.png" />
+        </a>
+    </div>
+    <div class="dot">
+        <a href="@Url.Action("AllWorksIndex", "Employer", new { currentFilter = "全部" })" style="display:inline-block">
+            <img class="dot_img" src="~/Pictures/f.png" />
+        </a>
+    </div>
+
+</div>
+
+
+<div class="dot_wrap">
+    @if (ViewBag.selectedNothing != null)
+    {
+        <span style="font-size:120%; color:red;">拍謝！沒有你要搜尋的東西喔~~</span>
+    }
+
+</div>
+
+
+
+ *以下金額僅大略估計，工時不滿一小時則四捨五入計算。
+@*單頁瀏覽佳if判斷的原因：當沒有資料的時候，把pagesize = 0傳回controller，會有error。因為ToPagedList不吃為0的pagesize。*@
+@if (Model.Count() != 0)
+{
+    <a class="single_page" href="@Url.Action("AllWorksIndex", "Employer", new {  sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, onePage = ViewBag.onePage })">
+        @(ViewBag.onePage ? "單頁瀏覽" : "多頁瀏覽")
+    </a>
+}
+
+
+<div class="row" style="margin:5px">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <a href="@Url.Action("WorkDetails", "Employer",  new { id = item.EventID })" style="display:block;color:black;">
+                <div class="selected_work">
+
+                    <div style="background-color: @(item.statusColor);width:100%; float:top;height:5%;position: absolute;left:0,top:0"></div>
+                    <div style="padding-top:8%;width:100%;padding:10%;">
+                        @*常用的font family(英文，中文我不行)：https://www.w3schools.com/cssref/css_websafe_fonts.asp *@
+                        <div class="work_name">
+                            <div class=" animated-underline animated-underline_type4 news__link"
+                                 style="  display: inline;
+                                --uiAnimatedUnderlineWidth: var(--animatedUnderlineWidth, 100%);
+                                --uiAnimatedUnderlineHeight: var(--animatedUnderlineHeight, 2px);
+                                --uiAnimatedUnderlineBgColor: var(--animatedUnderlineBgColor,  @(item.statusColor));
+                                --uiAnimatedUnderlinePositionX: var(--animatedUnderlinePositionX, left);
+                                --uiAnimatedUnderlinePositionY: var(--animatedUnderlinePositionY, bottom);">
+                                @item.Name
+                            </div>
+                        </div>
+
+                        <div class="time">
+                            <img src="~/Pictures/date.png" class="date_pic" />
+                            @item.Date.ToShortDateString() <br />
+                            &emsp; &emsp; &emsp;@Html.DisplayFor(m => item.Time_Start)
+                            &ensp; ~  &ensp;
+                            @Html.DisplayFor(m => item.Time_End)
+                        </div>
+                        <hr />
+                        <div>
+                            <img src="~/Pictures/blue_person.jpg" class="person_pic" />
+                            @Html.DisplayFor(m => item.NumberOfWorkers)
+                        </div>
+                        <hr />
+                        <div>
+                            <img src="~/Pictures/cost3.png" class="cost_pic" />
+                            <div style=" display: inline-block;">
+                                總預算： @Html.DisplayFor(m => item.EstimatedCost) <br>
+                                實際支付： @Html.DisplayFor(m => item.ActualCost)
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+            </a>
+        </div>
+    }
+
+</div>
+
+
+@if (ViewBag.onePage)
+{
+    <br />
+    @:第 @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber ) 頁，總共 @Model.PageCount 頁
+    @Html.PagedListPager(Model, page => Url.Action("AllWorksIndex",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }),
+    new PagedListRenderOptions
+    {
+        LinkToFirstPageFormat = "<< 第一頁",
+        LinkToPreviousPageFormat = "< 前一頁",
+        LinkToNextPageFormat = "後一頁 >",
+        LinkToLastPageFormat = "最末頁 >>"
+    })
+}

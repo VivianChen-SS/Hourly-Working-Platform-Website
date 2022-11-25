@@ -1,0 +1,53 @@
+﻿:root {
+    --colour-black: #1e1e1e;
+    --colour-white: #ffffff;
+    --font-family: Lato,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+    --font-size: 100%;
+}
+
+
+input[type="submit"], .button {
+    --button: hsl(0, 0%, 12%);
+    --button-hover: hsl(0, 0%, 20%);
+    --button-active: hsl(0, 0%, 30%);
+    --button-visited: hsl(0, 0%, 20%);
+    --button-colour: var(--colour-white);
+    --button-border: var(--colour-black);
+}
+
+
+input[type="submit"] {
+    --button: hsl(0, 100%, 90%);
+    --button-hover: #ff9999;
+    --button-active: hsl(0, 100%, 84%);
+    --button-visited: hsl(0, 100%, 94%);
+    --button-colour: var(--colour-black);
+    --button-border: var(--colour-black);
+}
+
+
+input[type="submit"] {
+    padding: .9rem 1.7rem;
+    color: var(--button-colour);
+    font-weight: 500;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+    background: var(--button);
+    border: solid 0px var(--button-border);
+    box-shadow: inset 0 0 0 2px var(--colour-white);
+    margin-right: 1em;
+}
+
+    input[type="submit"]:hover {
+        font-weight: bolder;
+        background: var(--button-hover);
+        box-shadow: inset 0 0 0 5px var(--colour-white);
+    }
+
+    input[type="submit"]:active {
+        background: var(--button-active);
+    }
+
+　input[type="submit"]:visited {
+    background: var(--button-visited);
+}

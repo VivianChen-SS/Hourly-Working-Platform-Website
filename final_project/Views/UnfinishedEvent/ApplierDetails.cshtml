@@ -1,0 +1,310 @@
+﻿@model final_project.Models.WORKER
+
+@{
+    ViewBag.Title = "ApplierDetails";
+}
+
+<link href="~/Content/ApplierDetails.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<h2>@Model.Name 的履歷</h2>
+@if (ViewBag.Rating != null)
+{
+    @:技能、性格適配度：
+    var rating = ViewBag.Rating < 0.0 ? 0 : ViewBag.Rating;
+    @rating
+    for (int i = 0; i < rating; i++)
+    {
+        <span class="fa fa-star checked"></span>
+    }
+    for (int i = 0; i < 10 - rating; i++)
+    {
+        <span class="fa fa-star "></span>
+    }
+}
+@if (ViewBag.Hire)
+{
+    <h1>已錄取🎉</h1>
+}
+else if (ViewBag.LackofWorkers == 0)
+{
+    <h3>已額滿！真是遺珠之憾啊😥！</h3>
+}
+<hr />
+
+
+
+
+<div class="row" style="font-size:larger">
+    <div class="col-md-3">
+        <br>
+        <dd>
+            @{
+                if (Model.ImageData != null)
+                {
+                    <img src="~/UnfinishedEvent/RetrieveImage?id=@Model.WorkerID" style="height:100%;width:100%; border-radius:50%" />
+                }
+                else
+                {
+                    <img src="~/Pictures/nophoto.jpg" style="height:100%;width:100%; border-radius:50%" />
+                }
+            }
+        </dd>
+    </div>
+
+    <h3><strong>基本資料</strong></h3>
+    <hr style="border:0;background-color:#7cab98;height:2px;">
+    <div class="col-md-4 detail">
+        <div class="table"> 性別： @Html.DisplayFor(model => model.Gender) </div>
+        <div class="table">手機：@Html.DisplayFor(model => model.Tel) </div>
+        <div class="table">生日：@Model.Birthday.ToLongDateString() </div>
+
+    </div>
+    <div class="col-md-4 detail">
+        <div class="table">學歷：@Html.DisplayFor(model => model.School) @Html.DisplayFor(model => model.GraduationStatus) </div>
+        <div class="table">信箱：@Html.DisplayFor(model => model.Email) </div>
+    </div>
+</div>
+
+
+
+<div class="row" style="font-size:larger">
+    <div style="margin-left:50px;">
+        <h3><strong>其他</strong></h3>
+        <hr style="border:0;background-color:#7cab98;height:2px;">
+    </div>
+    <div class="col-md-6 detail">
+        <div class="table">
+
+
+            自我介紹： <br />
+
+            @Html.DisplayFor(model => model.SelfInfo)<br /><br />
+            作品連結：
+
+            @*目前的寫法是，即便有些作品沒有連結，但也會顯示出作品名稱，之後必須先跟app確認worker的輸入驗證允不允許沒有連結的作品*@
+            @if (Model.ProjectName_1 != null)
+            {
+                if (Model.ProjectLink_1 != null)
+                {
+                    <img src="~/Pictures/projectLink.png" height="15px" width="15px" />
+                    <a href="@Model.ProjectLink_1" target="_blank" style="margin-right:20px">@Model.ProjectName_1</a>
+                }
+                else
+                {
+                    <img src="~/Pictures/project.png" height="20px" width="20px" />
+                    <span style="margin-right:20px">@Model.ProjectName_1</span>
+                }
+            }
+            <span>、</span>
+            @if (Model.ProjectName_2 != null)
+            {
+                if (Model.ProjectLink_2 != null)
+                {
+                    <img src="~/Pictures/projectLink.png" height="15px" width="15px" />
+                    <a href="@Model.ProjectLink_2" target="_blank" style="margin-right:20px">@Model.ProjectName_2</a>
+                }
+                else
+                {
+                    <img src="~/Pictures/project.png" height="20px" width="20px" />
+                    <span style="margin-right:20px">@Model.ProjectName_2</span>
+                }
+            }
+            <br />
+            作品描述：<br />
+
+            @Html.DisplayFor(model => model.ProjectDescription) <br />
+
+            工作經驗： <br />
+
+            @Html.DisplayFor(model => model.WorkExperience) <br />
+        </div>
+    </div>
+    <div class="col-md-6 detail">
+        標籤：
+        @*<table>
+            <tr>
+                @if (Model.SKILLTABs != null)
+                {
+                    int count = 0;
+                    foreach (var skillTab in Model.SKILLTABs)
+                    {
+                        if (count++ % 6 == 0)
+                        {
+                        @:</tr><tr>
+                        }
+                        @:<td>
+                            <p style="margin-left:30px;">@skillTab.SkillName</p>
+                        }
+                    }
+                    else
+                    {
+                        @: 沒有標籤喔~~ </td>
+                    }
+            </tr>
+        </table>*@
+
+        <ul class="tags">
+            @if (Model.SKILLTABs != null)
+            {
+                foreach (var skillTab in Model.SKILLTABs)
+                {
+                    <li class="tag">@skillTab.SkillName</li>
+                }
+            }
+            else
+            {
+                <span style="color:black">沒有標籤喔~~ </span>
+            }
+        </ul>
+
+        此平台上的經歷：
+
+        <table style="margin:0px -100px 0px 0px">
+            <tr>
+                @if (@ViewBag.Experience != null)
+                {
+                    int count = 0;
+                    foreach (var exp in ViewBag.Experience)
+                    {
+                        if (count++ % 4 == 0)
+                        {
+                        @:</tr><tr>
+                        }
+                        @:<td>
+                            string workID = @exp.Key;
+                            <a class = "underlined underlined--gradient" style="font-size:18px" href="@Url.Action("Details", "UnfinishedEvent", new { id = @exp.Key})">@exp.Value</a>
+                          
+                        }
+                    }
+                    else
+                    {
+                        @: 沒有標籤喔~~ </td>
+                    }
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+<div style="margin-top:100px">
+    @if (!ViewBag.Hire && ViewBag.LackofWorkers != 0)
+    {
+        <p>總需 @ViewBag.NumberOfWorkers 人，已錄取 @( ViewBag.NumberOfWorkers - ViewBag.LackofWorkers ) 人，尚缺 @ViewBag.LackofWorkers  人</p>
+        using (Html.BeginForm())
+        {
+            @:為避免糾紛，錄用後即不可修改
+            <input type="hidden" name="workerId" value="@ViewBag.workId" />
+            <input type="hidden" name="applierId" value="@Model.WorkerID" />
+            <input type="submit" value="錄用" />
+        }
+    }
+</div>
+
+
+
+
+
+
+
+@*<div style="left:40%; top :10%;position:absolute;height:50%">
+        <span style="width:100px;font-size:10px; font-weight:bold">名字： </span> @Html.DisplayFor(model => model.Name) <br />
+        <span style="width:100px;font-size:10px; font-weight:bold">性別： </span> @Html.DisplayFor(model => model.Gender)<br />
+        <span style="width:100px;font-size:10px; font-weight:bold">手機： </span>@Html.DisplayFor(model => model.Tel)<br />
+        <span style="width:100px;font-size:10px; font-weight:bold">生日： </span>@Model.Birthday.ToLongDateString()<br />
+        <span style="width:100px;font-size:10px; font-weight:bold">學歷： </span>@Html.DisplayFor(model => model.School) &emsp;&emsp;&emsp; @Html.DisplayFor(model => model.GraduationStatus)<br />
+        <span style="width:100px;font-size:10px; font-weight:bold">信箱： </span>@Html.DisplayFor(model => model.Email)<br />
+    </div>*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3><img src="~/Pictures/phone.png" width="35px" height="35px" />通話專區</h3>
+<hr style="height:2px; margin:0px 0px 20px 0px; color:gray;background-color:gray;">
+<div class="row">
+    <div class="col-md-4">
+        <strong style="font-size:large">
+            撥打 @Model.Name 的電話：
+            <mark>
+                <a href="tel:@Model.Tel">@Model.Tel</a>
+            </mark>
+        </strong>
+    </div>
+    <div class="col-md-4">
+        <h4><b>STEP 1: </b>請按下左方電話連結。</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <h4><b>STEP 2: </b>請在右上方選擇自己的手機。</h4>
+        <img class="zoom_1" src="~/Pictures/phoneCall_pic1.png" style="margin-left:30px; width:200px;height:150px" />
+    </div>
+    <div class="col-md-4">
+        <h4><b>STEP 3: </b>傳送中，請保持手機為開啟狀態。</h4>
+        <img class="zoom_2" src="~/Pictures/phoneCall_pic2.png" style="margin-left:30px;width:250px;height:150px" />
+    </div>
+    <div class="col-md-4">
+        <h4><b>STEP 4: </b>按下手機撥號按鈕，即可撥通。</h4>
+        <img class="zoom_3" src="~/Pictures/phoneCall_pic3.png" style="margin-left:30px;width:140px;height:250px" />
+    </div>
+</div>
+
+<h3><img src="~/Pictures/email.png" width="35px" height="35px" />寄信專區</h3>
+<hr style="height:2px; margin:0px 0px 20px 0px; color:gray;background-color:gray">
+<div>
+    @if (ViewBag.SendMailOK != null)
+    {
+        <div style="border-left: 3px solid #eee;background-color: #F4FDF0; border-color: #3C763D;padding:5px">
+            <h4 style="color: #3C763D;">信件已成功寄出~~</h4>
+            信件內文如下：<br>
+            @Html.Raw(ViewBag.MailContext)
+
+        </div>
+    }
+    else
+    {
+        using (Html.BeginForm())
+        {
+            @:主旨： @Html.TextBox("mailSubject", "您好，打工職前面試")
+            <br />
+            @:內文： @Html.TextArea("mailContext", new { @class = "ckeditor", placeholder = "mailContext" })
+            @Html.TextBox("applierId", null, new { @Value = Model.WorkerID, @class = "hidden" })
+            @Html.TextBox("workID", null, new { @Value = ViewBag.Id, @class = "hidden" })
+            @Html.TextBox("hire", null, new { @Value = ViewBag.Hire, @class = "hidden" })
+
+            <div style="border-left: 3px solid #eee;background-color: #cce5ff; border-color: #0073e6;padding:5px; margin-bottom:10px">
+                <b>🛈 信末附註：</b>
+                <br /> 雇主姓名 : @ViewBag.EmpName
+                <br /> 雇主信箱: @ViewBag.EmpEmail
+                <br /> 雇主電話: @ViewBag.EmpTel
+                <br /> 請詳閱：  <b><a href="@Url.Action("Details", "UnfinishedEvent", new { id = ViewBag.Id, showHires = false })">工作內容詳情</a></b>
+                <br /> ––––––發自【第N組專題__XXXXX打工平台】的信，若有要事，請直接連絡雇主。請勿回信，系統無法幫您轉達🙂
+            </div>
+            <input id="sendMail" name="sendMail" type="submit" value="傳送" />
+        }
+
+    }
+</div>
+
+
+
+@section Scripts{
+    <script src="~/ckeditor/ckeditor.js"></script>
+    <script src="~/ckeditor/adapters/jquery.js"></script>
+}

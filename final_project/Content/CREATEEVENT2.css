@@ -1,0 +1,85 @@
+﻿body {
+    background-color: #f3f3f3;
+    font-family: "微軟正黑體", "Microsoft JhengHei", "Segoe UI Semibold", "Segoe UI", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+}
+
+
+.information {
+    background-color: #7cab98;
+    display: table;
+    width: 500px;
+    height: 450px;
+    margin-left: 50px;
+    border-radius: 5px;
+}
+
+.wage {
+    background-color: #7cab98;
+    display: table;
+    width: 500px;
+    height: 800px;
+    margin-left: 50px;
+    border-radius: 5px;
+}
+
+
+
+.event_inside_1 {
+    background-color: #aaa;
+    display: table;
+    width: 300px;
+    height: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    float: none;
+}
+
+.event_inside_2 {
+    background-color: #f3f3f3;
+    margin-left: 10px;
+    width: 300px;
+}
+
+
+.event_inside_3 {
+    background-color: #aaa;
+    margin-left: 50px;
+    width: 300px;
+}
+
+.event_inside_4 {
+    background-color: #aaa;
+    margin-left: 125px;
+    width: 350px;
+    height: 130px;
+}
+
+.event_inside_5 {
+    background-color: #f3f3f3;
+    margin-left: 30px;
+    width: 360px;
+}
+
+
+.btn-default {
+    background-color: #f3f3f3;
+    color: #7cab98;
+    font-size: medium;
+    font-weight: 700;
+    margin-left: 18px;
+}
+
+
+.tab_block {
+    background-color: #aaa;
+    width: 700px;
+    height: 400px;
+    margin-left: 100px;
+}
+
+.MBIT {
+    background-color: #aaa;
+    width: 700px;
+    height: 1000px;
+    margin-left: 100px;
+}

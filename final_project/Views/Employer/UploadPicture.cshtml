@@ -1,0 +1,46 @@
+﻿@model final_project.Models.ImageViewModels
+
+<script type="text/javascript">
+    function fileCheck(obj) {
+        var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+        if ($.inArray($(obj).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+            alert("Only '.jpeg','.jpg', '.png', '.gif', '.bmp' formats are allowed.");
+        }
+    }
+</script>
+<h2>上傳大頭貼</h2>
+@using (Html.BeginForm("UploadPicture", "Employer", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @*@Html.AntiForgeryToken()*@
+    @Html.HiddenFor(m => m.empID)
+
+
+
+    <div class="form-group">
+        不傳照片，按下儲存，原本的頭貼會不見喔！ (其實不想擺頭貼，也沒關係啦 (￣﹃￣)，只是寫網頁的同學會很難過，枉費她寫了著個功能WW  )
+        <div class="col-md-10">
+            <input type="file" name="PictureData" id="PictureData" onchange="fileCheck(this);" />
+            @Html.ValidationMessageFor(model => model.image)
+        </div>
+    </div>
+
+    @*<div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="儲存" class="btn btn-default" />
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        <table style="float:left; margin:10px; margin-left:30%">
+            <tr>
+                <td><input type="submit" value="儲存" class="btn btn-default" /></td>
+                <td> @Html.ActionLink("回上一頁", "Index", null, new { @class = "underlined underlined--gradient" })</td>
+            </tr>
+        </table>
+    </div>
+}
+@*<div>
+        @Html.ActionLink("Back to List", "Index", new { @class = "underlined underlined--gradient" })
+    </div>*@
+
+

@@ -1,0 +1,362 @@
+﻿@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url(https://use.fontawesome.com/releases/v5.3.1/css/all.css);
+
+.selected_work {
+    position: relative;
+    overflow: hidden;
+    background-color: white;
+    height: 320px;
+    width: 100%;
+    margin-right: 3px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.work_name {
+    font-family: 'Arial Black', '微軟正黑體', 'Microsoft JhengHei',Gadget, sans-serif;
+    font-weight: bold;
+    font-size: 1.875em; /* 30px/16=1.875em */
+    width: 100%;
+    max-height: 115px;
+    min-height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dot:hover, .selected_work:hover {
+    /*以下內容取自：https://css-tricks.com/almanac/properties/b/box-shadow/ */
+    /*第一種*/
+    /*-webkit-transform: rotate(3deg);
+            -moz-transform: rotate(3deg);
+            -o-transform: rotate(3deg);
+            -ms-transform: rotate(3deg);
+            transform: rotate(3deg);
+            right: 10px;
+            left: auto; */
+    /*陰影顏色__鐵鏽褐*/
+    /*-webkit-box-shadow: 0 1px 4px rgba( 204, 102, 0, 0.4), 0 0 40px rgba( 204, 102, 0, 0.2) inset;
+            -moz-box-shadow: 0 1px 4px rgba( 204, 102, 0, 0.4), 0 0 40px rgba( 204, 102, 0, 0.2) inset;
+            box-shadow: 0 1px 4px rgba( 204, 102, 0, 0.4), 0 0 40px rgba( 204, 102, 0, 0.2) inset;*/
+    /*第二種*/
+    transform: scale(1.03);
+    /*陰影顏色__東華紫*/
+    /*-webkit-box-shadow: 0 1px 4px rgba(119, 51, 255, 0.4), 0 0 40px rgba( 119, 51, 255, 0.2);
+            -moz-box-shadow: 0 1px 4px rgba( 119, 51, 255, 0.4), 0 0 40px rgba( 119, 51, 255, 0.2);
+            box-shadow: 0 1px 4px rgba( 119, 51, 255, 0.4), 0 0 40px rgba( 119, 51, 255, 0.2);*/
+    /*陰影顏色__蒼藍灰*/
+    -webkit-box-shadow: 0 1px 4px rgba(92, 92, 138, 0.4), 0 0 40px rgba( 92, 92, 138, 0.2);
+    -moz-box-shadow: 0 1px 4px rgba( 92, 92, 138, 0.4), 0 0 40px rgba( 92, 92, 138, 0.2);
+    box-shadow: 0 1px 4px rgba( 92, 92, 138, 0.4), 0 0 40px rgba( 92, 92, 138, 0.2);
+}
+
+
+/*以下參考網址：https://codepen.io/melnik909/pen/xNmpZw*/
+.animated-underline {
+    /*
+        1. 如果底色要能夠換行的話，那個div要display:inline
+        2. Adds opportunity to create multi-line padding
+    */
+    --rLinkDisplay: inline; /* 1 */
+    background-image: linear-gradient(0, var(--uiAnimatedUnderlineBgColor) 0, var(--uiAnimatedUnderlineBgColor));
+    background-size: var(--uiAnimatedUnderlineWidth) var(--uiAnimatedUnderlineHeight);
+    background-position: var(--uiAnimatedUnderlinePositionX) var(--uiAnimatedUnderlinePositionY);
+    background-repeat: no-repeat;
+    -webkit-box-decoration-break: clone; /* 2 */
+    box-decoration-break: clone; /* 2 */
+    will-change: background-size;
+    transition: background-size .25s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+.animated-underline_type5 {
+    --animatedUnderlineWidth: 100%;
+    --animatedUnderlineHeight: 5px;
+    --animatedUnderlinePositionY: 90%;
+}
+
+    .animated-underline_type5:hover {
+        --animatedUnderlineHeight: 1rem;
+    }
+
+.news__link::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.animated-underline_type3 {
+    --animatedUnderlineHeight: 0;
+}
+
+    .animated-underline_type3:hover {
+        --animatedUnderlineHeight: 100%;
+    }
+
+.animated-underline_type4 {
+    --animatedUnderlineWidth: 0%;
+    --animatedUnderlineHeight: 5px;
+    --animatedUnderlinePositionY: 90%;
+}
+
+    .animated-underline_type4:hover {
+        --animatedUnderlineWidth: 100%;
+        --animatedUnderlineHeight: 15px;
+        --animatedUnderlinePositionY: 90%;
+    }
+
+/*dropdown START*/
+.dropbtn {
+    display: inline-block;
+    padding: 0.5em 1.5em;
+    border: 0.16em solid #669900;
+    margin: 0 0.3em 0.3em 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-weight: bold;
+    color: #669900;
+    text-align: center;
+    transition: all 0.15s;
+}
+
+.dropdown {
+    float: right;
+}
+
+.list_2 {
+    clear: right;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+    .dropdown-content .sorting_a {
+        color: #669900;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+
+        .dropdown-content .sorting_a:hover {
+            font-size: 130%;
+            font-weight: bold;
+            color: #e68a00;
+            border: 0.16em solid #e68a00;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+    .dropdown-content a {
+        color: #669900;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+
+        .dropdown-content a:hover {
+            font-size: 130%;
+            font-weight: bold;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+.a:hover {
+    color: #e60073;
+    border: 0.16em solid #e60073;
+}
+
+.b:hover {
+    color: #ff9900;
+    border: 0.16em solid #ff9900;
+}
+
+.c:hover {
+    color: #FFD700;
+    border: 0.16em solid #FFD700;
+}
+
+.d:hover {
+    color: #53c68c;
+    border: 0.16em solid #53c68c;
+}
+
+.e:hover {
+    color: #c180ff;
+    border: 0.16em solid #c180ff;
+}
+
+.f:hover {
+    color: #a6a6a6;
+    border: 0.16em solid #a6a6a6;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    font-size: 115%;
+    color: #e68a00;
+    border-color: #e68a00;
+    background-color: #ffffff;
+    -webkit-transform: rotate(3deg);
+    -moz-transform: rotate(3deg);
+    -o-transform: rotate(3deg);
+    -ms-transform: rotate(3deg);
+    transform: rotate(3deg);
+    right: 10px;
+    left: auto;
+    -webkit-box-shadow: 0 1px 4px rgba( 204, 102, 0, 0.4), 0 0 40px rgba( 204, 102, 0, 0.2) inset;
+    -moz-box-shadow: 0 1px 4px rgba( 204, 102, 0, 0.4), 0 0 40px rgba( 204, 102, 0, 0.2) inset;
+    box-shadow: 0 1px 4px rgba( 204, 102, 0, 0.4), 0 0 40px rgba( 204, 102, 0, 0.2) inset;
+}
+/*dropdown END*/
+
+/*search bar START*/
+body {
+    min-width: 550px;
+}
+
+.search {
+    width: 100%;
+    position: relative;
+    display: flex;
+}
+
+.searchTerm {
+    width: 100%;
+    border: 3px solid #669900;
+    border-right: none;
+    padding: 5px;
+    height: 36px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #669900;
+}
+
+    .searchTerm:focus {
+        color: #669900;
+    }
+
+.searchButton {
+    width: 40px;
+    height: 36px;
+    border: 1px solid #669900;
+    background: #669900;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap {
+    width: 30%;
+    position: relative;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/*search bar END*/
+.dot_wrap {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 280px;
+    margin-top: 5px
+}
+
+.dot {
+    display: inline-block;
+    border-radius: 50%;
+}
+
+.dot_img {
+    width: 40px;
+    height: 40px
+}
+
+.single_page {
+    display: inline-block;
+    padding: 0.2em 0.8em;
+    border: 0.16em solid #ff9966;
+    margin: 0 0.3em 0.3em 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 120%;
+    color: #ff9966;
+    text-align: center;
+    transition: all 0.15s;
+}
+
+    .single_page:hover {
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 120%;
+        color: #ff9966;
+    }
+
+.filter_buttonlink {
+    display: inline-block;
+    padding: 0.2em 0.5em;
+    border: 0.16em solid #669900;
+    border-radius:10px;
+    margin: 1em 0.3em 0.3em 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 120%;
+    color: #669900;
+    text-align: center;
+    transition: all 0.15s;
+    width: 80px
+}
+
+    .filter_buttonlink:hover {
+        background-color: white;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 120%;
+        color: #ff9966;
+        border: 0.2em solid #ff9966;
+    }
+
+.time {
+    font-family: Impact, Charcoal, sans-serif, monospace;
+}
+
+hr {
+    margin: 3px;
+    height: 1px;
+    background-color: #efeff5;
+}
+
+.date_pic {
+    width: 30px;
+    height: 33px
+}
+
+.person_pic {
+    width: 20px;
+    height: 24px;
+    display: inline-block;
+    float: left;
+}
+
+.cost_pic {
+    width: 30px;
+    height: 28px;
+    float: left;
+    display: inline-block
+}

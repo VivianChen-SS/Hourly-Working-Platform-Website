@@ -1,0 +1,25 @@
+﻿.underlined {
+    color: black;
+    flex: 1;
+    font-size: 1.5em;
+    line-height: 1.2;
+    text-decoration: none;
+    background-image: linear-gradient(to right, yellow 0, yellow 100%);
+    background-position: 0 1.2em;
+    background-size: 0 100%;
+    background-repeat: no-repeat;
+    transition: background .5s;
+    position: relative;
+    float: left;
+    margin: 5px
+}
+
+    .underlined:hover {
+        background-size: 100% 100%;
+        text-decoration: none;
+    }
+
+.underlined--gradient {
+    background-position: 0 -0.1em;
+    background-image: linear-gradient(to right, #ccccff 0, #99ccff 100%);
+}

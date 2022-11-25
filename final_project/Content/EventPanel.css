@@ -1,0 +1,108 @@
+﻿:root {
+    --border-size: 0.4rem;
+    --duration: 250ms;
+    --ease: cubic-bezier(0.215, 0.61, 0.355, 1);
+    --font-family: monospace;
+    --color-primary: #ffbd21;
+    --color-secondary: black;
+    --color-tertiary: dodgerblue;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --space: 1rem;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/*body {
+        margin: 0 auto;
+        display: grid;
+        place-items: center;
+        padding: calc(var(--space) * 2);
+        max-width: 700px;
+    }*/
+
+.multi-button {
+    display: flex;
+    width: 60%;
+    min-width: 400px;
+    box-shadow: var(--shadow) 4px 4px;
+    height: 6rem;
+}
+
+    .multi-button button {
+        flex-grow: 1;
+        cursor: pointer;
+        position: relative;
+        padding: calc(var(--space) / 1.125) var(--space) var(--space);
+        border: var(--border-size) solid black;
+        color: var(--color-secondary);
+        background-color: var(--color-primary);
+        font-size: 2.5rem;
+        font-weight: bolder;
+        font-family: var(--font-family);
+        text-transform: lowercase;
+        text-shadow: var(--shadow) 2px 2px;
+        transition: flex-grow var(--duration) var(--ease);
+        border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    }
+
+        .multi-button button + button {
+            border-left: var(--border-size) solid black;
+            margin-left: calc(var(--border-size) * -1);
+        }
+
+        .multi-button button:hover,
+        .multi-button button:focus {
+            flex-grow: 2;
+            color: #ffbd21;
+            font-size: 3rem;
+            font-weight: bolder;
+            outline: none;
+            text-shadow: none;
+            background-color: var(--color-secondary);
+        }
+
+        .multi-button button:focus {
+            outline: var(--border-size) dashed var(--color-primary);
+            outline-offset: calc(var(--border-size) * -3);
+        }
+
+    .multi-button:hover button:focus:not(:hover) {
+        flex-grow: 1;
+        color: var(--color-secondary);
+        background-color: var(--color-primary);
+        outline-color: var(--color-tertiary);
+    }
+
+    .multi-button button:active {
+        transform: translateY(var(--border-size));
+    }
+
+
+.sketchy {
+    border: solid 5px hsla(0, 95%, 35%, 1);
+}
+/*.sketchy {
+        padding: 4rem 8rem;
+        display: inline-block;
+        border: 3px solid #333333;
+        font-size: 2.5rem;
+        border-radius: 2% 6% 5% 4% / 1% 1% 2% 4%;
+        text-transform: uppercase;
+        letter-spacing: 0.3ch;
+        background: #ffffff;
+        position: relative;
+    }
+        .sketchy::before {
+            content: '';
+            border: 2px solid #353535;
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate3d(-50%, -50%, 0) scale(1.015) rotate(0.5deg);
+            border-radius: 1% 1% 2% 4% / 2% 6% 5% 4%;
+        }*/

@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<style>
+    .wrap {
+        width: 30%;
+        position: relative;
+        margin-top:200px;
+        top: 10%;
+        left: 40%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+
+
+    <img src="~/Pictures/cover.png" style="width:60%;height:25%; margin:5% 20% 5% 20%" />
+
+
+
+
+<div class="container">
+    <div class="row">
+        @*<div class="col-md-4 d-flex services align-self-stretch px-4 ftco-animate">
+            <div class="d-block services-wrap1 text-center">
+                <div class="media-body p-2 mt-3">
+                    <h3 class="heading"><b>開立打工機會<b></h3>
+                    <input type="button" class="btn btn-default" value="開立工作事項" onclick="location.href='@Url.Action("Create", "CreateEvent")'" />
+                </div>
+            </div>
+        </div>*@
+          <a class="col-md-4 d-flex services align-self-stretch px-4 ftco-animate" href="@Url.Action("Create", "CreateEvent")">
+            <div class="d-block services-wrap1 text-center">
+                <div class="media-body p-2 mt-3">
+                    <h1 class="heading" style="margin:20% 5% 0% 0%;color:white"><b>開立打工機會<b></h1>
+                </div>
+            </div>
+        </a>
+
+
+        <a class="col-md-4 d-flex services align-self-stretch px-4 ftco-animate" href="@Url.Action("Index", "UnfinishedEvent")">
+            <div class="d-block services-wrap2 text-center">
+                <div class="media-body p-2 mt-3">
+                    <h1 class="heading" style="margin:20% 5% 0% 0%;color:white"><b>未完結招募清單<b></h1>
+                </div>
+            </div>
+        </a>
+
+
+        <a class="col-md-4 d-flex services align-self-stretch px-4 ftco-animate" href="@Url.Action("Index", "Employer")">
+            <div class="d-block services-wrap3 text-center">
+                <div class="media-body p-2 mt-3">
+                    <h1 class="heading" style="margin:20% 5% 0% 0%;color:white;"><b>雇主專區<b></h1>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+    </section>
+
+
+
+

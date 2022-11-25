@@ -1,0 +1,213 @@
+﻿@model final_project.Models.CreateEventViewModels
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+<link href="~/Content/EVENT6.css" rel="stylesheet" />
+
+<h2>輸入資料</h2>
+<span style="color:gray">
+    <b style="color:black"> STEP 1) 輸入資料 ></b>
+    STEP 2) 選擇標籤 >
+    STEP 3) 選擇職業適配性格 >
+    STEP 4) 確認資料 >
+    STEP 5) 成功送出，等待回覆！
+</span>
+<hr />
+
+
+
+@if (ViewBag.InvalidTimeSpan != null)
+{
+    <p style="padding:5px;display: inline-block;background-color:peachpuff">@ViewBag.InvalidTimeSpan</p> <br />
+}
+@if (ViewBag.InvalidResumeNumber != null)
+{
+    <p style="padding:5px;display: inline-block;background-color:peachpuff">@ViewBag.InvalidResumeNumber</p><br />
+}
+@if (ViewBag.InvalidOffListTime != null)
+{
+    <p style="padding:5px;display: inline-block;background-color:peachpuff">@ViewBag.InvalidOffListTime</p><br />
+}
+@if (ViewBag.InvalidWage != null)
+{
+    <p style="padding:5px;display: inline-block;background-color:peachpuff">@ViewBag.InvalidWage</p><br />
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.TextBoxFor(m => m.EventID, new { @type = "hidden", @Value = DateTime.Now.ToString("yyyyMMddHHmmssfff") })
+        @*@Model.EmployerID*@
+        @Html.HiddenFor(m => m.EmployerID)
+
+
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-md-6 information">
+                    <br><br>
+                    <div class="form-group">
+                        <h4><b><font color="white">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   標題</font></b></h4>
+                        <div class="col-md-10 event_inside_1">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <h4><b><font color="white">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   日期</font></b></h4>
+                        <div class="col-md-10 event_inside_1">
+                            @Html.TextBoxFor(model => model.Date, new { @class = "form-control", type = "date" })
+                            @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-10 col-md-offset-2 event_inside_2">
+                            <div style=" display: table">
+                                <div style="display: table-cell;padding-right:30px" onclick="showTimeEnd('showTimeEndCheckbox')">
+                                    <input type="checkbox" id="showTimeEndCheckbox" name="showTimeEndCheckbox" value="hasTimeEnd" checked />
+                                    <label for="showTimeEndCheckbox">起訖時間</label>
+                                </div>
+                                <div style="display: table-cell;padding-right:30px" onclick="hideTimeEnd('hideTimeEndCheckbox')">
+                                    <input type="checkbox" id="hideTimeEndCheckbox" name="hideTimeEndCheckbox" />
+                                    <label for="hideTimeEndCheckbox">只有起始時間</label>
+                                </div>
+                            </div>
+                            <div style="display:table">
+                                <div style="display: table-cell;padding-right:5px">
+                                    @Html.TextBoxFor(model => model.Time_Start, new { @class = "form-control", type = "time" })
+                                    @Html.ValidationMessageFor(model => model.Time_Start, "", new { @class = "text-danger" })
+                                </div>
+                                <div id="slash" style="display: table-cell;padding-right:5px">~</div>
+                                <div id="timeEnd" name="timeEnd" style="display: table-cell;padding-right:20px">
+                                    @Html.TextBoxFor(model => model.Time_End, new { @class = "form-control", type = "time" })
+                                    @Html.ValidationMessageFor(model => model.Time_End, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <h4><b><font color="white">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   電話</font></b></h4>
+                        <div class="col-md-10 event_inside_1">
+                            @Html.EditorFor(model => model.Tel, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Tel, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <h4><b><font color="white">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   地點 (若無特定地點，可寫「遠距工作」)</font></b></h4>
+                        <div class="col-md-10 event_inside_1">
+                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                            <input type="button" class="btn btn-warning" value="地圖上顯示地址" onclick="showMap('map')" style="margin:5px" />
+                        </div>
+                        <iframe name="map" id="map" class="col-md-10 col-md-offset-2" frameborder="0" style="display:none; height:250px"></iframe>
+                    </div>
+                   
+                    <div class="form-group">
+                        <h4><b><font color="white">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   人數</font></b></h4>
+                        <div class="col-md-10 event_inside_1">
+                            @Html.EditorFor(model => model.NumberOfWorkers, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NumberOfWorkers, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 wage">
+                    <br>
+                    <div class="form-group">
+                        <br>
+                        <h4><b><font color="white">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   薪資</font></b></h4>
+                        <div class="col-md-10 col-md-offset-2 event_inside_4">
+                            <div style=" display: table">
+                                <div style="display: table-cell;padding-right:20px" onclick="wageByHour('byHourCheckbox')">
+                                    <input type="checkbox" id="byHourCheckbox" name="byHourCheckbox" value="byHour" checked />
+                                    <label for="byHourCheckbox">以時計費(單位：NT$/時)</label>
+                                </div>
+                                <div style="display: table-cell;padding-right:20px" onclick="wageByOthers('byOthersCheckbox')">
+                                    <input type="checkbox" id="byOthersCheckbox" name="byOthersCheckbox" />
+                                    <label for="byOthersCheckbox">其他方式</label>
+                                </div>
+                            </div>
+
+                            <div id="byHour" name="byHour">
+                                @Html.EditorFor(model => model.Wage_byHour, new { htmlAttributes = new { @class = "form-control", @Value = "160" } })
+                                @Html.ValidationMessageFor(model => model.Wage_byHour, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div id="byOthers" name="byOthers" style="display:none">
+                                @Html.EditorFor(model => model.Wage_byOthers, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Wage_byOthers, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <br>
+
+
+                        <div class="form-group">
+                            <h4><b><font color="white">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   履歷上限</font></b></h4>
+                            <div class="col-md-10 event_inside_1">
+                                @Html.EditorFor(model => model.maxResumeNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.maxResumeNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <h4><b><font color="white">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   下架時間</font></b></h4>
+                            <div class="col-md-10 event_inside_1">
+                                @Html.TextBoxFor(model => model.OffListTime, "{0:yyyy/M/d hh:mm}", new { @class = "form-control", type = "datetime-local" })
+                                @Html.ValidationMessageFor(model => model.OffListTime, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <h4><b><font color="white">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   內容</font></b></h4>
+                        <div class="col-md-10 event_inside_5">
+                            @Html.TextAreaFor(model => model.Abouts, new { @class = "ckeditor", placeholder = "Intro" })
+                            @Html.ValidationMessageFor(model => model.Abouts, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" name="formSubmitButton" value="建立" class="btn btn-default btn-block submit_create" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+
+
+
+@*以下這段先不要動*@
+@section Scripts {
+    <script src="~/ckeditor/ckeditor.js"></script>
+    <script src="~/ckeditor/adapters/jquery.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/CreateEvent.js"></script>
+    <script>
+        //抓取EditorFor這段JS要寫在同一頁，才能生效
+        function showMap(map) {
+            var address = document.getElementById("Address").value;
+            if (address != "") {
+                var map = document.getElementById(map);
+                map.style.display = "block";
+                map.src = "https://www.google.com/maps/embed/v1/place?q=" + address + "&key=AIzaSyA-BLW-5csaWqjE4P0yLZdieY7DJ_0p19A";
+            }
+        }
+    </script>
+}

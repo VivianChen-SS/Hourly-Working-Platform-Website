@@ -1,0 +1,157 @@
+﻿@model final_project.Models.EMPLOYER
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h1>編輯</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>雇主資訊</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.EmployerID)
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*這種寫法也可以，但比較醜一點就是了X"D *@
+                @*@Html.DropDownListFor(model => model.Gender, ViewBag.genderList as IEnumerable<SelectListItem>, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownList("Gender", ViewBag.genderList as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Tel, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Tel, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Tel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Birthday, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Birthday, "{0:yyyy-MM-dd}", new { @class = "form-control", @readonly = true })
+                @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Acknowledge, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Acknowledge, new { @class = "ckeditor", placeholder = "Acknowledge" })
+
+                @*@Html.EditorFor(model => model.Acknowledge, new { htmlAttributes = new { @class = "form-control" } })*@
+            </div>
+            <div>
+                @Html.ValidationMessageFor(model => model.Acknowledge, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+
+
+    <div onclick="hideCompanyForm('clearCompany')">
+        @{
+            if (Model.COMPANY != null)
+            {
+                <h4>公司資訊</h4>
+                <input type="checkbox"
+                       id="clearCompany"
+                       name="clearCompany"
+                       value="@Model.CompanyID" />
+                <label for="clearCompany">清除公司資料</label> <br />
+            }
+
+        }
+    </div>
+
+    <div class="form-horizontal">
+
+
+        @if (Model.COMPANY != null)
+        {
+            <div id="companyFormGroup">
+                @Html.HiddenFor(model => model.COMPANY.CompanyID)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.COMPANY.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.COMPANY.Name, new { htmlAttributes = new { @class = "form-control", id = "CompanyName" } })
+                        @Html.ValidationMessageFor(model => model.COMPANY.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.COMPANY.Tel, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.COMPANY.Tel, new { htmlAttributes = new { @class = "form-control", id = "CompanyTel" } })
+                        @Html.ValidationMessageFor(model => model.COMPANY.Tel, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.COMPANY.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.COMPANY.Address, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.COMPANY.Address, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.COMPANY.Industry, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("COMPANY.Industry", ViewBag.industryList as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.COMPANY.Industry, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.COMPANY.Intro, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.COMPANY.Intro, new { @class = "ckeditor", placeholder = "Intro" })
+                        @Html.ValidationMessageFor(model => model.COMPANY.Intro, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        }
+
+
+        @*<div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="儲存更改" class="btn btn-default" style="width:40%"/>
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            <table style="margin-left:30%">
+                <tr>
+                    <td> <input type="submit" value="儲存更改" class="btn btn-default"/></td>
+                    <td> @Html.ActionLink("回上一頁", "Index", null, new { @class = "underlined underlined--gradient" })</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    
+}
+
+
+@section Scripts {
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/ckeditor/ckeditor.js"></script>
+    <script src="~/ckeditor/adapters/jquery.js"></script>
+    @*<script src="~/Scripts/HideCompanyForm.js"></script>*@
+    <script src="~/Scripts/EmployerEditJS.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
