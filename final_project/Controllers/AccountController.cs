@@ -190,7 +190,7 @@ namespace final_project.Controllers
                     mail.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(mailContext, null, MediaTypeNames.Text.Html));
 
                     SmtpClient smtpClient = new SmtpClient("smtp.sendgrid.net", Convert.ToInt32(587));
-                    System.Net.NetworkCredential credentials = new System.Net.NetworkCredential("azure_40a0cf7e8b6722b9c5b262ccded1ced1@azure.com", "Fin@lPr0ject");
+                    System.Net.NetworkCredential credentials = new System.Net.NetworkCredential("azure_40****@azure.com", "password here");
                     smtpClient.Credentials = credentials;
                     smtpClient.Send(mail);
 
@@ -277,7 +277,7 @@ namespace final_project.Controllers
                 mail.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(mailContext, null, MediaTypeNames.Text.Html));
 
                 SmtpClient smtpClient = new SmtpClient("smtp.sendgrid.net", Convert.ToInt32(587));
-                System.Net.NetworkCredential credentials = new System.Net.NetworkCredential("azure_40a0cf7e8b6722b9c5b262ccded1ced1@azure.com", "Fin@lPr0ject");
+                System.Net.NetworkCredential credentials = new System.Net.NetworkCredential("azure_40****@azure.com", "password here");
                 smtpClient.Credentials = credentials;
                 smtpClient.Send(mail);
 
