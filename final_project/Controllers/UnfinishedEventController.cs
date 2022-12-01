@@ -16,6 +16,7 @@ namespace final_project.Controllers
 {
     public class UnfinishedEventController : Controller
     {
+    
         finalprojectEntities db = new finalprojectEntities();
 
         //private static int numberOfWorkers = 0;
@@ -110,23 +111,7 @@ namespace final_project.Controllers
         {
             return View();
         }
-        //[Route("UnfinishedEvent/EventPanel/{id}/{name}/{numOfWorkers}/{numOfHired}/{noApplier?}")]
-        //public ActionResult EventPanel(string id, string name, int numOfWorkers, int numOfHired, bool? noApplier)
-        //{
-        //    if (Session["EmployerID"] == null)
-        //        return RedirectToAction("Login", "Account");
-        //    if (id == null)
-        //        return RedirectToAction("Index");
-
-        //    numberOfWorkers = numOfWorkers;
-        //    numberOfHired = numOfHired;
-        //    ViewBag.Id = id;
-        //    ViewBag.Name = name;
-        //    ViewBag.NumberOfWorkers = numberOfWorkers;
-        //    ViewBag.NumberOfHired = numberOfHired;
-        //    ViewBag.NoApplier = noApplier == true ? true : false;
-        //    return View();
-        //}
+      
         [Route("UnfinishedEvent/EventPanel/{id}/{noApplier?}")]
         public ActionResult EventPanel(string id, bool? noApplier)
         {
@@ -273,65 +258,6 @@ namespace final_project.Controllers
             //寄信
             if (Request.Form["sendMail"] != null)
             {
-                //MailMessage mail = new MailMessage();
-                //WORKER applier = db.Workers
-                //    .Where(w => w.WorkerID == id)
-                //    .Single();
-                //mail.To.Add(new MailAddress( applier.Email ));
-                //mail.From = new MailAddress( ConfigurationManager.AppSettings["Email"].ToString());
-                //mail.Subject = mailSubject; //信件主旨
-
-                //String empId = Session["EmployerID"].ToString();
-                //EMPLOYER emp = db.Employers
-                //    .Where(e => e.EmployerID == empId)
-                //    .Single();
-                //mail.IsBodyHtml = true;
-                //var workLink = Url.Action("Details", "UnfinishedEvent", new { id = workID, showHires = false }, protocol: Request.Url.Scheme);
-
-                //mailContext = mailContext 
-                //    + "<hr  style=\"height: 2px; margin: 0px 0px 30px 0px; color: gray; background - color:gray\"><br/>雇主姓名 :  " + emp.Name
-                //    + "<br/>雇主信箱:  " + db.AspNetUsers.Where(i => i.Id == emp.Id).Single().Email
-                //    + "<br/>雇主電話:  " + emp.Tel
-                //    + "<br/>請詳閱：<a href =\"" + workLink + "\">工作內容詳情</a>"
-                //    +"<br/>––––––發自【第N組專題__人力共享平台】的信。若有要事，請直接連絡雇主。請勿回信，系統無法幫您轉達🙂";
-                //mail.Body = mailContext;
-                //SmtpClient smtp = new SmtpClient();
-                ////SMTP Server Address of gmail
-                //smtp.Host = "smtp.gmail.com";
-                //smtp.Port = 587;
-                //smtp.Credentials = new System.Net.NetworkCredential(
-                //    ConfigurationManager.AppSettings["Email"].ToString(),
-                //    ConfigurationManager.AppSettings["Password"].ToString());
-
-                //// Smtp Email ID and Password For authentication
-                //smtp.EnableSsl = true;
-                //smtp.Send(mail);
-
-                //WORKER applier = db.Workers
-                // .Where(w => w.WorkerID == id)
-                // .Single();
-                //String empId = Session["EmployerID"].ToString();
-                //EMPLOYER emp = db.Employers
-                //    .Where(e => e.EmployerID == empId)
-                //    .Single();
-                //var workLink = Url.Action("Details", "UnfinishedEvent", new { id = workID, showHires = false }, protocol: Request.Url.Scheme);
-
-                //string AzureWebJobsSendGridApiKey = "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";
-                //dynamic sg = new SendGridAPIClient(AzureWebJobsSendGridApiKey);
-                //Email from = new Email("shadedsirius@gmail.com", "mail from finalproject");
-                ////標題
-                //string subject = mailSubject;
-                //Email to = new Email("vivian0602.chen@gmail.com");
-                //Content content = new Content("text/html",
-                //    "<hr  style=\"height: 2px; margin: 0px 0px 30px 0px; color: gray; background - color:gray\"><br/>雇主姓名 :  " + emp.Name
-                //    + "<br/>雇主信箱:  " + db.AspNetUsers.Where(i => i.Id == emp.Id).Single().Email
-                //    + "<br/>雇主電話:  " + emp.Tel
-                //    + "<br/>請詳閱：<a href =\"" + workLink + "\">工作內容詳情</a>"
-                //    + "<br/>––––––發自【第N組專題__人力共享平台】的信。若有要事，請直接連絡雇主。請勿回信，系統無法幫您轉達🙂");
-                //Mail mail = new Mail(from, subject, to, content);
-                //dynamic response = sg.client.mail.send.post(requestBody: mail.Get());
-
-
                 WORKER applier = db.Workers
                  .Where(w => w.WorkerID == id)
                  .Single();
@@ -356,7 +282,7 @@ namespace final_project.Controllers
 
                 // Init SmtpClient and send
                 SmtpClient smtpClient = new SmtpClient("smtp.sendgrid.net", Convert.ToInt32(587));
-                System.Net.NetworkCredential credentials = new System.Net.NetworkCredential("azure_40a0cf7e8b6722b9c5b262ccded1ced1@azure.com", "Fin@lPr0ject");
+                System.Net.NetworkCredential credentials = new System.Net.NetworkCredential("azure_40****@azure.com", "");
                 smtpClient.Credentials = credentials;
                 smtpClient.Send(mail);
 
@@ -424,16 +350,7 @@ namespace final_project.Controllers
                     NumberOfHired = work.NumberOfWorkers - work.LackofWorkers,
                     StillNeed = work.LackofWorkers
                 };
-                //int hiredCount = 0;
-                //foreach (var junctionTable in work.EVENT_WORKER_JUNCTION)
-                //{
-                //    if (junctionTable.Hire == true)
-                //    {
-                //        hiredCount++;
-                //    }
-                //}
-                //temp.NumberOfHired = hiredCount;
-                //temp.StillNeed = temp.NumberOfWorkers - temp.NumberOfHired;
+               
                 temp.HeatColorPercentage = percentageArray[count];
                 unfinishedEvents.Add(temp);
                 count++;
@@ -498,22 +415,7 @@ namespace final_project.Controllers
                 percentageArray[i] = Math.Round((zScoreRoundArray[i] - zScoreRoundArray.Min()) * 70 / zScoreRange);
                 percentageArray[i] = 100 - percentageArray[i];
             }
-
-
-            //ViewBag.heatArray = heatArray;
-            //ViewBag.zScoreRoundArray = zScoreRoundArray;
-            //ViewBag.remainingHoursArray = remainingHoursArray;
-            //ViewBag.lackArray = lackArray;
-
             return percentageArray;
-            ////STEP5: Stuff Stuff into ViewBag
-            //ViewBag.heatArray = heatArray;
-            //ViewBag.hiredArray = hiredArray;
-            //ViewBag.lackArray = lackArray;
-            //ViewBag.percentageArray = percentageArray;
-            //ViewBag.remainingHoursArray = remainingHoursArray;
-            ////ViewBag.zScoreArray = zScoreArray;
-            //ViewBag.zScoreRoundArray = zScoreRoundArray;
         }
 
         private IEnumerable<ResumeListViewModels> initResumeListViewModels(string workId)
