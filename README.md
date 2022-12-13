@@ -5,8 +5,7 @@ A website for users to pay somebody else to finish their job for them.
 <div align="center">
   <img src="https://user-images.githubusercontent.com/52370596/204268652-b7ffabd5-f41b-4b7a-9f8b-bcedc69851ec.png" width="600" height="auto">
    
-
-  <h3 align="center"> Hourly Working Platform Website</h3>
+  <h3 align="center"><a href="https://groupn-finalproject.azurewebsites.net/"><strong>Hourly Working Platform Website</strong></a></h3>
 
   <p align="center">
     <strong>Log in</strong>
